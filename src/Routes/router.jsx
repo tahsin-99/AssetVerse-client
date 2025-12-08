@@ -10,60 +10,64 @@ import ManageEmployees from "../Layout/DashBoardLayout/MenuPages/ManageEmployees
 import RequestAssets from "../Layout/DashBoardLayout/MenuPages/RequestAssets";
 import Payment from "../Layout/DashBoardLayout/MenuPages/Payment";
 import Profile from "../Layout/DashBoardLayout/MenuPages/Profile";
-
+import About from "../Pages/About";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:HomeLayout,
-    children:[
-       {
-         path:'/',
-        Component:Home
-    }
-    ]
-  },
-  
-  {
-    path:'/register',
-    Component:Register
-  },
-  {
-    path:'/login',
-    Component:Login
+    Component: HomeLayout,
+    children: [
+      {
+       index:true,
+        Component: Home,
+      },
+
+      {
+        path: "/about",
+        Component: About,
+      },
+    ],
   },
 
   {
-    path:'/dashboard',
-    Component:Dashboard,
-    children:[
-      {
-        path:'add-assets',
-        Component:AddAssets
-      },
-      {
-         
-        path:'affiliated-employees',
-        Component:AffiliatedEmployees
-      
-      },
-      {
-         path:'manage-employees',
-        Component:ManageEmployees
-      },
-      {
-         path:'request-assets',
-        Component:RequestAssets
-      },
-      {
-         path:'payment',
-        Component:Payment
-      },
-      {
-         path:'profile',
-        Component:Profile
-      }
-    ]
-  }
+    path: "/request-assets",
+    Component: RequestAssets,
+  },
 
+  {
+    path: "/register",
+    Component: Register,
+  },
+  {
+    path: "/login",
+    Component: Login,
+  },
+
+  {
+    path: "/dashboard",
+    Component: Dashboard,
+    children: [
+      {
+        path: "add-assets",
+        Component: AddAssets,
+      },
+      {
+        path: "affiliated-employees",
+        Component: AffiliatedEmployees,
+      },
+      {
+        path: "manage-employees",
+        Component: ManageEmployees,
+      },
+
+      {
+        path: "payment",
+        Component: Payment,
+      },
+      {
+        path: "profile",
+        Component: Profile,
+      },
+    ],
+  },
 ]);

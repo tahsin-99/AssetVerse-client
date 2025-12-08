@@ -5,10 +5,12 @@ import Footer from '../../Components/Footer';
 
 const HomeLayout = () => {
     return (
-        <div>
+        <div className=''>
            <Navbar></Navbar>
-           <Outlet></Outlet>
+           <div className='pt-[100px]'>
+            <Outlet></Outlet>
            <Footer></Footer>
+           </div>
         </div>
     );
 };
