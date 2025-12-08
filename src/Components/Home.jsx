@@ -6,6 +6,8 @@ import Banner from './Banner';
 import AboutSection from './AboutSection';
 import PackageSection from './PackageSection';
 import FeaturesSection from './FeaturesSection';
+import Testimonials from './Testimonials';
+import Extras from './Extras';
 
 const Home = () => {
     return (
@@ -14,6 +16,8 @@ const Home = () => {
           <AboutSection></AboutSection>
           <PackageSection></PackageSection>
           <FeaturesSection></FeaturesSection>
+          <Testimonials></Testimonials>
+          <Extras></Extras>
         </div>
     );
 };
