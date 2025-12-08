@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { AiOutlineMenu } from 'react-icons/ai';
 import useAuth from '../hooks/useAuth';
 import  unknown from '../assets/images/unknownUser.png'
+import logo from '../assets/images/logo.png'
 
 const Navbar = () => {
       const { user, logOut } = useAuth()
@@ -15,7 +16,9 @@ const Navbar = () => {
         <Container>
           <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
             {/* Logo */}
-            <Link to='/'>
+            <Link to='/' className='flex items-center-safe'>
+            <img src={logo} alt="" className='w-30'
+            />
               <p className='text-5xl font-bold'>AssetVerse</p>
             </Link>
             {/* Dropdown Menu */}

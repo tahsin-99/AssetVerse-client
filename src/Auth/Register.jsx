@@ -46,49 +46,42 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  
   const onSubmit = async (data) => {
-    const {name,image,email,password}=data
+    const { name, image, email, password } = data;
 
-    const imageFile=image[0]
+    const imageFile = image[0];
     // if(!imageFile){
     //     alert('no photo')
     //     return
     // }
 
-    const formData=new FormData()
-    formData.append('image',imageFile)
+    const formData = new FormData();
+    formData.append("image", imageFile);
 
-   
+    try {
+      const data = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        formData
+      );
 
-    
-      try {
+      const imageURL = data?.data?.data?.display_url;
 
-         const data=await axios.post( `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,formData)
-          
-         const imageURL=data?.data?.data?.display_url
-        
-        
+      //2. User Registration
+      const result = await createUser(email, password);
 
-        //2. User Registration
-        const result = await createUser(email, password)
-       
-        
+      //3. Save username & profile photo
+      await updateUserProfile(name, imageURL);
+      console.log(result);
 
-        //3. Save username & profile photo
-        await updateUserProfile(
-          name,
-          imageURL
-        )
-        console.log(result)
-
-        navigate(location?.state||'/')
-        toast.success('Signup Successful')
-        console.log(result);
-      } catch (err) {
-        console.log(err)
-        toast.error(err?.message)
-      }
+      navigate(location?.state || "/");
+      toast.success("Signup Successful");
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
   };
 
   const handleGoogleSignIn = async () => {
@@ -133,8 +126,8 @@ const Register = () => {
                   message: "Name cannot be too long",
                 })}
               />
-               {errors.name && (
-                <p className='text-red-500 text-xs mt-1'>
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">
                   {errors.name.message}
                 </p>
               )}
@@ -184,8 +177,8 @@ const Register = () => {
                   },
                 })}
               />
-               {errors.email && (
-                <p className='text-red-500 text-xs mt-1'>
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
                   {errors.email.message}
                 </p>
               )}
@@ -210,8 +203,8 @@ const Register = () => {
                   },
                 })}
               />
-               {errors.password && (
-                <p className='text-red-500 text-xs mt-1'>
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">
                   {errors.password.message}
                 </p>
               )}

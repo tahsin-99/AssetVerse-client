@@ -3,6 +3,7 @@ import HomeLayout from "../Layout/HomeLayout/HomeLayout";
 import Home from "../Components/Home";
 import Login from "../Auth/login";
 import Register from "../Auth/register";
+import Dashboard from "../Layout/DashBoardLayout/Dashboard";
 
 
 export const router = createBrowserRouter([
@@ -25,5 +26,11 @@ export const router = createBrowserRouter([
     path:'/login',
     Component:Login
   },
+
+  {
+    path:'/dashboard',
+    Component:Dashboard,
+    
+  }
 
 ]);
