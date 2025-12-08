@@ -9,9 +9,11 @@ const Banner = () => {
     const {user}=useAuth()
     return (
        <>
+       
         <div className="bg-gradient-to-r from-[#0A1D37] to-[#1B3B5F] text-white py-20 px-6 mt-100">
+    
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-
+            
         
         <div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight">
