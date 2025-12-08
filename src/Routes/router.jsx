@@ -18,8 +18,13 @@ export const router = createBrowserRouter([
     Component: HomeLayout,
     children: [
       {
-       index:true,
+        index: true,
         Component: Home,
+      },
+
+      {
+        path: "/request-assets",
+        Component: RequestAssets,
       },
 
       {
@@ -27,11 +32,6 @@ export const router = createBrowserRouter([
         Component: About,
       },
     ],
-  },
-
-  {
-    path: "/request-assets",
-    Component: RequestAssets,
   },
 
   {
