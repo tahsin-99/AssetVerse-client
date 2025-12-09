@@ -26,9 +26,9 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      <div className="drawer-content flex-1">
         {/* Navbar */}
         <nav className="navbar w-full bg-base-300">
           <label
@@ -52,7 +52,7 @@ const Sidebar = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4"> AssetVerse Dashboard</div>
+         
         </nav>
         {/* Page content here */}
       </div>

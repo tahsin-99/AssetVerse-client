@@ -25,13 +25,7 @@ const Navbar = () => {
                 <NavLink to="/employee-register">Join As Employee</NavLink>
                 <NavLink to="/hr-register">Join As HR Manager</NavLink> 
 
-                {user && (
-                  <>
-                   
-
-                    <NavLink to="/dashboard">Dashboard</NavLink>
-                  </>
-                )}
+                
               </div>
               {/* Dropdown Menu */}
               <div className="relative">

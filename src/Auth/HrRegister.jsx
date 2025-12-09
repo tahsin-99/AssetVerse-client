@@ -91,7 +91,7 @@ const HrRegister = () => {
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Register Now</h1>
+          <h1 className="my-3 text-4xl font-bold">Register As HR</h1>
           <p className="text-sm text-gray-400">Welcome to AssetVerse</p>
         </div>
         <form
