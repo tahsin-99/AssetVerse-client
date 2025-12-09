@@ -3,13 +3,19 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
+
 
 const AddAssets = () => {
+    const {user}=useAuth()
     const axiosSecure=useAxiosSecure() 
     const navigate=useNavigate()
-    const location=useLocation()
+    
   const { register, handleSubmit } = useForm();
+
+  
+  
 
   const addAsset=async(data)=>{
     const {productName,productImage,productType,productQuantity}=data
@@ -36,8 +42,11 @@ const AddAssets = () => {
         productName,
         productImage:imageURL,
         productType,
-        quantity:Number(productQuantity),
-        date:new Date()
+        productQuantity:Number(productQuantity),
+        availableQuantity:Number(productQuantity),
+        dateAdded:new Date(),
+        hrEmail:user.email,
+        
       })
        navigate('/dashboard/assets-list');
             toast.success("Asset added Successful");

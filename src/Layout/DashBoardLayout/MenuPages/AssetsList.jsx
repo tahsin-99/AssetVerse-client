@@ -16,6 +16,8 @@ const AssetsList = () => {
       return result.data;
     },
   });
+  console.log(user);
+  
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -66,6 +68,7 @@ const AssetsList = () => {
       }
     });
   };
+  
 
   return (
     <div className="overflow-x-auto border-2 border-blue-800 rounded">
@@ -101,8 +104,8 @@ const AssetsList = () => {
                 <p>{asset.productName}</p>
               </td>
               <td>{asset.productType}</td>
-              <td>{asset.quantity}</td>
-              <td>{asset.date}</td>
+              <td>{asset.productQuantity}</td>
+              <td>{asset.dateAdded}</td>
               <td>
                 <button
                   onClick={() => setSelectedAsset(asset)}
