@@ -8,7 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const Register = () => {
+const EmployeeRegister = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } =
     useAuth();
   const navigate = useNavigate();
@@ -254,4 +254,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default EmployeeRegister;

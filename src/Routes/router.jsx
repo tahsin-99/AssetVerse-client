@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import HomeLayout from "../Layout/HomeLayout/HomeLayout";
 import Home from "../Components/Home";
 import Login from "../Auth/login";
-import Register from "../Auth/register";
+
 import Dashboard from "../Layout/DashBoardLayout/Dashboard";
 import AddAssets from "../Layout/DashBoardLayout/MenuPages/AddAssets";
 import AffiliatedEmployees from "../Layout/DashBoardLayout/MenuPages/AffiliatedEmployees";
@@ -11,6 +11,8 @@ import RequestAssets from "../Layout/DashBoardLayout/MenuPages/RequestAssets";
 import Payment from "../Layout/DashBoardLayout/MenuPages/Payment";
 import Profile from "../Layout/DashBoardLayout/MenuPages/Profile";
 import About from "../Pages/About";
+import EmployeeRegister from "../Auth/EmployeeRegister";
+import HrRegister from "../Auth/HrRegister";
 
 export const router = createBrowserRouter([
   {
@@ -35,8 +37,12 @@ export const router = createBrowserRouter([
   },
 
   {
-    path: "/register",
-    Component: Register,
+    path: "/employee-register",
+    Component: EmployeeRegister,
+  },
+  {
+    path: "/hr-register",
+    Component:HrRegister,
   },
   {
     path: "/login",

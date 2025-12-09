@@ -9,7 +9,7 @@ import ContactCTA from "./ContactCta";
 
 const Extras = () => {
   return (
-    <div>
+    <div >
       <HowItWorks></HowItWorks>
       <FaqSection></FaqSection>
       <ContactCTA></ContactCTA>

@@ -21,7 +21,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50 mt-60">
       <div className="container mx-auto px-5">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           How <span className="text-blue-600">AssetVerse</span> Works
