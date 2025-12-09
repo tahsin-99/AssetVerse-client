@@ -4,41 +4,17 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { FcGoogle } from "react-icons/fc";
+
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const EmployeeRegister = () => {
+  const axiosSecure = useAxiosSecure();
   const { createUser, updateUserProfile, signInWithGoogle, loading } =
     useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  //   const handleSubmit = async event => {
-  //     event.preventDefault()
-  //     const form = event.target
-  //     const name = form.name.value
-  //     const email = form.email.value
-  //     const password = form.password.value
-
-  //     try {
-  //       //2. User Registration
-  //       const result = await createUser(email, password)
-
-  //       //3. Save username & profile photo
-  //       await updateUserProfile(
-  //         name,
-  //         'https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c'
-  //       )
-  //       console.log(result)
-
-  //       navigate(location?.state||'/')
-  //       toast.success('Signup Successful')
-  //     } catch (err) {
-  //       console.log(err)
-  //       toast.error(err?.message)
-  //     }
-  //   }
 
   const {
     register,
@@ -47,13 +23,10 @@ const EmployeeRegister = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { name, image, email, password } = data;
+    const { name, image, email, password, joiningDate } = data;
 
     const imageFile = image[0];
-    // if(!imageFile){
-    //     alert('no photo')
-    //     return
-    // }
+    console.log(data);
 
     const formData = new FormData();
     formData.append("image", imageFile);
@@ -73,10 +46,16 @@ const EmployeeRegister = () => {
 
       //3. Save username & profile photo
       await updateUserProfile(name, imageURL);
-      console.log(result);
+      await axiosSecure.post("/users", {
+        name,
+        image: imageURL,
+        email,
+        joiningDate,
+        role: "Employee",
+      });
 
       navigate(location?.state || "/");
-      toast.success("Signup Successful");
+      toast.success("Register Successful");
       console.log(result);
     } catch (err) {
       console.log(err);
@@ -87,7 +66,15 @@ const EmployeeRegister = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      const user = result.user;
+      await axiosSecure.post("http://localhost:3000/users", {
+        name: user.displayName,
+        email: user.email,
+        image: user.photoURL,
+        role: "Employee",
+        joiningDate: new Date(),
+      });
 
       navigate(location?.state || "/");
       toast.success("Signup Successful");
@@ -96,11 +83,12 @@ const EmployeeRegister = () => {
       toast.error(err?.message);
     }
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Sign Up</h1>
+          <h1 className="my-3 text-4xl font-bold">Register Now</h1>
           <p className="text-sm text-gray-400">Welcome to AssetVerse</p>
         </div>
         <form
@@ -118,7 +106,7 @@ const EmployeeRegister = () => {
                 type="text"
                 id="name"
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("name", {
                   required: "Name is required",
@@ -132,6 +120,7 @@ const EmployeeRegister = () => {
                 </p>
               )}
             </div>
+
             {/* Image */}
             <div>
               <label
@@ -145,14 +134,14 @@ const EmployeeRegister = () => {
                 id="image"
                 accept="image/*"
                 className="block w-full text-sm text-gray-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-md file:border-0
-      file:text-sm file:font-semibold
-      file:bg-lime-50 file:text-lime-700
-      hover:file:bg-lime-100
-      bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
-      focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
-      py-2"
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded-md file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-blue-50 file:text-blue-700
+                 hover:file:bg-lime-100
+                 bg-gray-100 border border-dashed border-blue-300 rounded-md cursor-pointer
+                 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400
+                 py-2"
                 {...register("image")}
               />
               <p className="mt-1 text-xs text-gray-400">
@@ -167,7 +156,7 @@ const EmployeeRegister = () => {
                 type="email"
                 id="email"
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("email", {
                   required: "Name is required",
@@ -193,8 +182,8 @@ const EmployeeRegister = () => {
                 type="password"
                 autoComplete="new-password"
                 id="password"
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                placeholder="Input Your Password"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -210,16 +199,26 @@ const EmployeeRegister = () => {
               )}
             </div>
           </div>
+          <div>
+            <label>Date of Birth</label>
+            <input
+              {...register("joiningDate", {
+                required: "Date is required",
+              })}
+              type="date"
+              className="input"
+            />
+          </div>
 
           <div>
             <button
               type="submit"
-              className="bg-lime-500 w-full rounded-md py-3 text-white"
+              className="bg-[#1B3B5F] w-full rounded-md py-3 text-white btn"
             >
               {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
+                <span className="loading loading-bars loading-xs"></span>
               ) : (
-                "Continue"
+                "Register"
               )}
             </button>
           </div>
@@ -231,19 +230,44 @@ const EmployeeRegister = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div
+        <button
           onClick={handleGoogleSignIn}
-          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+          className="btn bg-white text-black border-[#e5e5e5]"
         >
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </div>
+          <svg
+            aria-label="Google logo"
+            width="16"
+            height="16"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <g>
+              <path d="m0 0H512V512H0" fill="#fff"></path>
+              <path
+                fill="#34a853"
+                d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+              ></path>
+              <path
+                fill="#4285f4"
+                d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+              ></path>
+              <path
+                fill="#fbbc02"
+                d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+              ></path>
+              <path
+                fill="#ea4335"
+                d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+              ></path>
+            </g>
+          </svg>
+          Login with Google
+        </button>
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="hover:underline hover:text-lime-500 text-gray-600"
+            className="hover:underline hover:text-blue-600 text-gray-600"
           >
             Login
           </Link>

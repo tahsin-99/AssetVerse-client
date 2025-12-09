@@ -4,19 +4,18 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { FcGoogle } from "react-icons/fc";
+
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const HrRegister = () => {
-    const axiosSecure=useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { createUser, updateUserProfile, signInWithGoogle, loading } =
     useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  
   const {
     register,
     handleSubmit,
@@ -24,10 +23,10 @@ const HrRegister = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { name,companyName, image, email, password,joiningDate, } = data;
+    const { name, companyName, image, email, password, joiningDate } = data;
 
     const imageFile = image[0];
-   console.log(data);
+    console.log(data);
 
     const formData = new FormData();
     formData.append("image", imageFile);
@@ -47,41 +46,39 @@ const HrRegister = () => {
 
       //3. Save username & profile photo
       await updateUserProfile(name, imageURL);
-       await axiosSecure.post('/users',{
+      await axiosSecure.post("/users", {
         name,
         companyName,
-        image:imageURL,
+        image: imageURL,
         email,
         joiningDate,
-        role:"HR"
-
-    })
-      
+        role: "HR",
+        packageLimit: 5,
+        currentEmployees: 0,
+        subscription: "basic",
+      });
 
       navigate(location?.state || "/");
-      toast.success("Signup Successful");
+      toast.success("Register Successful");
       console.log(result);
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
     }
-
-    
-   
   };
 
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-     const result= await signInWithGoogle();
-      const user =result.user
-      await axiosSecure.post('http://localhost:3000/users',{
-        name:user.displayName,
-        email:user.email,
-        image:user.photoURL,
-        role:'HR',
-        joiningDate:new Date()
-      })
+      const result = await signInWithGoogle();
+      const user = result.user;
+      await axiosSecure.post("http://localhost:3000/users", {
+        name: user.displayName,
+        email: user.email,
+        image: user.photoURL,
+        role: "HR",
+        joiningDate: new Date(),
+      });
 
       navigate(location?.state || "/");
       toast.success("Signup Successful");
@@ -112,7 +109,7 @@ const HrRegister = () => {
                 type="text"
                 id="name"
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("name", {
                   required: "Name is required",
@@ -126,15 +123,15 @@ const HrRegister = () => {
                 </p>
               )}
             </div>
-             <div>
+            <div>
               <label htmlFor="email" className="block mb-2 text-sm">
-                 Company Name
+                Company Name
               </label>
               <input
                 type="text"
                 id="company-name"
                 placeholder="Enter Your Company Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("companyName", {
                   required: "Name is required",
@@ -164,10 +161,10 @@ const HrRegister = () => {
              file:mr-4 file:py-2 file:px-4
              file:rounded-md file:border-0
              file:text-sm file:font-semibold
-             file:bg-lime-50 file:text-lime-700
+             file:bg-blue-50 file:text-blue-700
              hover:file:bg-lime-100
-             bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
-             focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
+             bg-gray-100 border border-dashed border-blue-300 rounded-md cursor-pointer
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400
              py-2"
                 {...register("image")}
               />
@@ -183,7 +180,7 @@ const HrRegister = () => {
                 type="email"
                 id="email"
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("email", {
                   required: "Name is required",
@@ -209,8 +206,8 @@ const HrRegister = () => {
                 type="password"
                 autoComplete="new-password"
                 id="password"
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                placeholder="Input Your Password"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-600 bg-gray-200 text-gray-900"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -226,12 +223,16 @@ const HrRegister = () => {
               )}
             </div>
           </div>
-
-          <input 
-          {...register("joiningDate",{
-            required:"Date is required"
-          })}
-          type="datetime-local" className="input" />
+          <div>
+            <label>Date of Birth</label>
+            <input
+              {...register("joiningDate", {
+                required: "Date is required",
+              })}
+              type="date"
+              className="input"
+            />
+          </div>
 
           <div>
             <button
@@ -239,9 +240,9 @@ const HrRegister = () => {
               className="bg-[#1B3B5F] w-full rounded-md py-3 text-white btn"
             >
               {loading ? (
-                <TbFidgetSpinner className="animate-spin m-auto" />
+                <span className="loading loading-bars loading-xs"></span>
               ) : (
-                "Continue"
+                "Register"
               )}
             </button>
           </div>
@@ -253,7 +254,10 @@ const HrRegister = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5]">
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn bg-white text-black border-[#e5e5e5]"
+        >
           <svg
             aria-label="Google logo"
             width="16"

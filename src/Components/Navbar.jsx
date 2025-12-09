@@ -16,7 +16,7 @@ const Navbar = () => {
           <Container>
             <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
               {/* Logo */}
-              <Link to="/" className="flex items-center-safe">
+              <Link to="/" className="flex items-center-safe ">
                 <img src={logo} alt="" className="w-30" />
                 <p className="text-5xl font-bold">AssetVerse</p>
               </Link>

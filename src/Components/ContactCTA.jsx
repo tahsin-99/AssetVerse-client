@@ -17,7 +17,7 @@ const ContactCTA = () => {
               to your company.
             </p>
             <Link
-              to="/register"
+              to="/login"
               className="bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition"
             >
               Get Started

@@ -66,7 +66,7 @@ const Login = () => {
                 id='email'
                 required
                 placeholder='Enter Your Email Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#1B3B5F] bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
               />
             </div>
@@ -82,8 +82,8 @@ const Login = () => {
                 autoComplete='current-password'
                 id='password'
                 required
-                placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                placeholder='Input Your Passsword'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#1B3B5F] bg-gray-200 text-gray-900'
               />
             </div>
           </div>
@@ -91,10 +91,10 @@ const Login = () => {
           <div>
             <button
               type='submit'
-              className='bg-lime-500 w-full rounded-md py-3 text-white'
+              className='bg-[#1B3B5F] btn w-full rounded-md py-3 text-white'
             >
               {loading ? (
-                <TbFidgetSpinner className='animate-spin m-auto' />
+                <span className="loading loading-bars loading-xs"></span>
               ) : (
                 'Continue'
               )}
@@ -113,20 +113,16 @@ const Login = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div
-          onClick={handleGoogleSignIn}
-          className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'
-        >
-          <FcGoogle size={32} />
-
-          <p>Continue with Google</p>
-        </div>
+        <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5]">
+  <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
+  Login with Google
+</button>
         <p className='px-6 text-sm text-center text-gray-400'>
           Don&apos;t have an account yet?{' '}
           <Link
             state={location?.state||'/'}
-            to='/register'
-            className='hover:underline hover:text-lime-500 text-gray-600'
+            to='/'
+            className='hover:underline hover:text-blue-500 text-gray-600'
           >
             Register
           </Link>
