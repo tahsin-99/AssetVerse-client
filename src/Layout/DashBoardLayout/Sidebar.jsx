@@ -8,7 +8,7 @@ import { AiOutlineBars } from "react-icons/ai";
 import { GrLogout, GrUserManager } from "react-icons/gr";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { MdFormatListBulletedAdd, MdOutlinePayment } from "react-icons/md";
-import { FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
+import { FaListUl, FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
 import { SiGoogletasks } from "react-icons/si";
 import { GiFullMotorcycleHelmet } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
@@ -147,6 +147,19 @@ const Sidebar = () => {
 
 
                   <span className="is-drawer-close:hidden">Add Assets</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Assets List"
+                  to="/dashboard/assets-list"
+                >
+                  <FaListUl />
+
+
+
+                  <span className="is-drawer-close:hidden">Assets List</span>
                 </NavLink>
               </li>
             </>

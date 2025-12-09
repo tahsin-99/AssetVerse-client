@@ -13,6 +13,7 @@ import Profile from "../Layout/DashBoardLayout/MenuPages/Profile";
 import About from "../Pages/About";
 import EmployeeRegister from "../Auth/EmployeeRegister";
 import HrRegister from "../Auth/HrRegister";
+import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
 
 export const router = createBrowserRouter([
   {
@@ -24,10 +25,7 @@ export const router = createBrowserRouter([
         Component: Home,
       },
 
-      {
-        path: "/request-assets",
-        Component: RequestAssets,
-      },
+     
 
       {
         path: "/about",
@@ -56,6 +54,14 @@ export const router = createBrowserRouter([
       {
         path: "add-assets",
         Component: AddAssets,
+      },
+       {
+        path: "assets-list",
+        Component: AssetsList,
+      },
+       {
+        path: "request-assets",
+        Component: RequestAssets,
       },
       {
         path: "affiliated-employees",

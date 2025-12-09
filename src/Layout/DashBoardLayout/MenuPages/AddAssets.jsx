@@ -37,8 +37,9 @@ const AddAssets = () => {
         productImage:imageURL,
         productType,
         quantity:Number(productQuantity),
+        date:new Date()
       })
-       navigate(location?.state || "/");
+       navigate('/dashboard/assets-list');
             toast.success("Asset added Successful");
             
     }
