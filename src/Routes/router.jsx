@@ -14,6 +14,8 @@ import About from "../Pages/About";
 import EmployeeRegister from "../Auth/EmployeeRegister";
 import HrRegister from "../Auth/HrRegister";
 import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
+import MyEmployeeList from "../Layout/DashBoardLayout/MenuPages/MyEmployeeList";
+
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +53,7 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     Component: Dashboard,
     children: [
+     
       {
         path: "add-assets",
         Component: AddAssets,
@@ -70,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-employees",
         Component: ManageEmployees,
+      },
+      {
+        path: "my-employee-list",
+        Component: MyEmployeeList,
       },
 
       {

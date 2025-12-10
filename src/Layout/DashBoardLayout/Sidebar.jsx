@@ -5,7 +5,7 @@ import { FcSettings } from "react-icons/fc";
 import { Link, NavLink, useNavigate } from "react-router";
 import { AiOutlineBars } from "react-icons/ai";
 
-import { GrLogout, GrUserManager } from "react-icons/gr";
+import { GrLogout, GrUserManager, GrUserWorker } from "react-icons/gr";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { MdFormatListBulletedAdd, MdOutlinePayment } from "react-icons/md";
 import { FaListUl, FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
@@ -14,17 +14,22 @@ import { GiFullMotorcycleHelmet } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import { IoGitPullRequestSharp } from "react-icons/io5";
+import useRole from "../../hooks/useRole";
+import Loading from "../../Components/Loading";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
+  const [role, isRoleLoading] = useRole();
 
   const handleLogout = () => {
     logOut()
       .then(() => navigate("/login"))
       .catch((err) => console.log(err));
   };
-
+  if (isRoleLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="drawer lg:drawer-open ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -52,7 +57,6 @@ const Sidebar = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-         
         </nav>
         {/* Page content here */}
       </div>
@@ -99,89 +103,97 @@ const Sidebar = () => {
 
             {/* Dashboard links */}
 
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip=" Request Assets"
-                to="/dashboard/request-assets"
-              >
-               <IoGitPullRequestSharp/>
+            {role === "Employee" && (
+              <>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip=" Request Assets"
+                    to="/dashboard/request-assets"
+                  >
+                    <IoGitPullRequestSharp />
 
+                    <span className="is-drawer-close:hidden">
+                      {" "}
+                      Request Assets
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
-                <span className="is-drawer-close:hidden"> Request Assets</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Payment"
-                to="/dashboard/payment"
-              >
-                <MdOutlinePayment />
+            {role === "HR" && (
+              <>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Add Assets"
+                    to="/dashboard/add-assets"
+                  >
+                    <MdFormatListBulletedAdd />
 
-                <span className="is-drawer-close:hidden"> Payment History</span>
-              </NavLink>
-            </li>
+                    <span className="is-drawer-close:hidden">Add Assets</span>
+                  </NavLink>
+                </li>
 
-            <>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Affiliated Employees"
-                  to="/dashboard/affiliated-employees"
-                >
-                  <FaTasks></FaTasks>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assets List"
+                    to="/dashboard/assets-list"
+                  >
+                    <FaListUl />
 
-                  <span className="is-drawer-close:hidden">
-                    Affiliated Employees
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Add Assets"
-                  to="/dashboard/add-assets"
-                >
-                  <MdFormatListBulletedAdd />
+                    <span className="is-drawer-close:hidden">Assets List</span>
+                  </NavLink>
+                </li>
 
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage Employees"
+                    to="/dashboard/manage-employees"
+                  >
+                    <GrUserManager />
 
-                  <span className="is-drawer-close:hidden">Add Assets</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Assets List"
-                  to="/dashboard/assets-list"
-                >
-                  <FaListUl />
+                    <span className="is-drawer-close:hidden">
+                      Manage Employees
+                    </span>
+                  </NavLink>
+                </li>
 
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Affiliated Employees"
+                    to="/dashboard/affiliated-employees"
+                  >
+                    <FaTasks></FaTasks>
 
+                    <span className="is-drawer-close:hidden">
+                      Affiliated Employees
+                    </span>
+                  </NavLink>
+                </li>
 
-                  <span className="is-drawer-close:hidden">Assets List</span>
-                </NavLink>
-              </li>
-            </>
+               
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Payment"
+                    to="/dashboard/payment"
+                  >
+                    <MdOutlinePayment />
 
-            {/* admin only links */}
+                    <span className="is-drawer-close:hidden">
+                      {" "}
+                      Payment History
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
-            <>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Manage Employees"
-                  to="/dashboard/manage-employees"
-                >
-                  <GrUserManager />
-
-
-                  <span className="is-drawer-close:hidden">
-                    Manage Employees
-                  </span>
-                </NavLink>
-              </li>
-            </>
             <li>
               <NavLink
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -207,8 +219,6 @@ const Sidebar = () => {
                 </span>
               </div>
             </li>
-
-           
           </ul>
         </div>
       </div>

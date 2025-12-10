@@ -21,7 +21,8 @@ const ManageEmployees = () => {
       status: "approved",
     };
     axiosSecure.patch(`/request-asset/${id}`, updatedData).then((res) => {
-      if (res.data.matchedCount) {
+        console.log(res);
+      if (res.data.modifiedCount) {
         Swal.fire({
           title: "Approved!",
           text: "Asset approved successfully.",
@@ -86,7 +87,8 @@ const ManageEmployees = () => {
               }
               
               <td>
-                <button
+              {asset.status==='pending'?(
+                <>  <button
                   onClick={() => handleUpdate(asset._id)}
                   className="btn bg-green-500 text-white"
                 >
@@ -97,7 +99,8 @@ const ManageEmployees = () => {
                   className="btn bg-orange-600 text-black"
                 >
                   Reject
-                </button>
+                </button></>
+              ):null}
               </td>
             </tr>
           ))}
