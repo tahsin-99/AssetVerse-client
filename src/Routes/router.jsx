@@ -14,13 +14,16 @@ import About from "../Pages/About";
 import EmployeeRegister from "../Auth/EmployeeRegister";
 import HrRegister from "../Auth/HrRegister";
 import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
-import MyEmployeeList from "../Layout/DashBoardLayout/MenuPages/MyEmployeeList";
+import Loading from "../Components/Loading";
+import Errorpage from "../Components/ErrorPage";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
+    hydrateFallbackElement:<Loading></Loading>,
+    errorElement:<Errorpage></Errorpage>,
     children: [
       {
         index: true,
@@ -74,10 +77,7 @@ export const router = createBrowserRouter([
         path: "manage-employees",
         Component: ManageEmployees,
       },
-      {
-        path: "my-employee-list",
-        Component: MyEmployeeList,
-      },
+      
 
       {
         path: "payment",

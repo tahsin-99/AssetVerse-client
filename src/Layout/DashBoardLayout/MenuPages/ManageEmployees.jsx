@@ -21,18 +21,34 @@ const ManageEmployees = () => {
       status: "approved",
     };
     axiosSecure.patch(`/request-asset/${id}`, updatedData).then((res) => {
-        console.log(res);
-      if (res.data.modifiedCount) {
+        
+        if (res.data.paymentRequired) {
         Swal.fire({
-          title: "Approved!",
-          text: "Asset approved successfully.",
-          icon: "success",
+          icon: "warning",
+          title: "Package Limit Finished!",
+          text: "Please upgrade your package to approve more employees.",
         });
+        return;
       }
+
+      Swal.fire({
+        title: "Approved!",
+        text: "Asset approved successfully.",
+        icon: "success",
+      });
+
       refetch();
+    })
+    .catch(err => {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: err.response?.data?.message || "Something went wrong",
+      });
     });
-  };
-  const handleDelete = async (id) => {
+     
+};
+const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -81,7 +97,7 @@ const ManageEmployees = () => {
               <td>{asset.employeeEmail}</td>
               <td>{asset.productName}</td>
               <td>{asset.quantity}</td>
-              <td>{asset.date}</td>
+              <td>{new Date(asset.date).toLocaleString()}</td>
               {
                 asset.status==='pending'? <td className="text-yellow-400    items-center font-semibold"><span className="badge badge-outline">Pending</span></td>: <td className="text-green-600 font-semibold "><span className="badge  badge-outline">Approved</span></td>
               }
