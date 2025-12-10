@@ -16,7 +16,7 @@ const AssetsList = () => {
       return result.data;
     },
   });
-  console.log(user);
+  
   
 
   const handleUpdate = (e) => {
