@@ -5,10 +5,16 @@ import { AiOutlineMenu } from "react-icons/ai";
 import useAuth from "../hooks/useAuth";
 import unknown from "../assets/images/unknownUser.png";
 import logo from "../assets/images/logo.png";
+import useRole from "../hooks/useRole";
+import Loading from "./Loading";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [role,isRoleLoading]=useRole()
+  if(isRoleLoading){
+    return <Loading></Loading>
+  }
   return (
     <div>
       <div className="fixed w-full bg-white z-10 shadow-sm">
@@ -22,8 +28,19 @@ const Navbar = () => {
               </Link>
               <div className="flex flex-row gap-4 font-bold">
                 <NavLink to="/">Home</NavLink>
-                <NavLink to="/employee-register">Join As Employee</NavLink>
-                <NavLink to="/hr-register">Join As HR Manager</NavLink> 
+                <NavLink to="/about">About</NavLink>
+                {
+                  role==='HR'&&
+                  <>
+                  <NavLink to="/employee-register">Join As Employee</NavLink>
+                  </>
+                }
+                {
+                  role==='Employee'&&
+                  <>
+                  <NavLink to="/hr-register">Join As HR Manager</NavLink>
+                  </>
+                } 
 
                 
               </div>
@@ -81,12 +98,7 @@ const Navbar = () => {
                           >
                             Login
                           </Link>
-                          <Link
-                            to="/register"
-                            className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
-                          >
-                            Sign Up
-                          </Link>
+                         
                         </>
                       )}
                     </div>
