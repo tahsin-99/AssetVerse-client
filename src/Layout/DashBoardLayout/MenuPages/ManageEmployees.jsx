@@ -3,10 +3,13 @@ import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const ManageEmployees = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate=useNavigate()
+  
 
   const { data: assets = [], refetch } = useQuery({
     queryKey: ["assets", user?.email],
@@ -20,35 +23,45 @@ const ManageEmployees = () => {
     const updatedData = {
       status: "approved",
     };
-    axiosSecure.patch(`/request-asset/${id}`, updatedData).then((res) => {
-        
-        if (res.data.paymentRequired) {
+    axiosSecure
+      .patch(`/request-asset/${id}`, updatedData)
+      .then((res) => {
+        console.log(res);
         Swal.fire({
-          icon: "warning",
-          title: "Package Limit Finished!",
-          text: "Please upgrade your package to approve more employees.",
+          title: "Approved!",
+          text: "Asset approved successfully.",
+          icon: "success",
         });
-        return;
-      }
+        refetch();
+      })
+      .catch((err) => {
+        // Check if payment/upgrade is required
+        const paymentRequired = err.response?.data?.paymentRequired;
 
-      Swal.fire({
-        title: "Approved!",
-        text: "Asset approved successfully.",
-        icon: "success",
+        if (paymentRequired) {
+          Swal.fire({
+            icon: "warning",
+            title: "Package Limit Finished!",
+            text: "Please upgrade your package to approve more employees.",
+            confirmButtonText: "Upgrade Now!!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              
+              navigate('/dashboard/payment')
+            }
+          });
+        } else {
+         
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: err.response?.data?.message || "Something went wrong",
+          });
+        }
       });
+  };
 
-      refetch();
-    })
-    .catch(err => {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.response?.data?.message || "Something went wrong",
-      });
-    });
-     
-};
-const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -60,7 +73,6 @@ const handleDelete = async (id) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/request-asset/${id}`).then((res) => {
-          console.log(res.data);
           if (res.data.deletedCount) {
             refetch();
             Swal.fire({
@@ -98,25 +110,34 @@ const handleDelete = async (id) => {
               <td>{asset.productName}</td>
               <td>{asset.quantity}</td>
               <td>{new Date(asset.date).toLocaleString()}</td>
-              {
-                asset.status==='pending'? <td className="text-yellow-400    items-center font-semibold"><span className="badge badge-outline">Pending</span></td>: <td className="text-green-600 font-semibold "><span className="badge  badge-outline">Approved</span></td>
-              }
-              
+              {asset.status === "pending" ? (
+                <td className="text-yellow-400    items-center font-semibold">
+                  <span className="badge badge-outline">Pending</span>
+                </td>
+              ) : (
+                <td className="text-green-600 font-semibold ">
+                  <span className="badge  badge-outline">Approved</span>
+                </td>
+              )}
+
               <td>
-              {asset.status==='pending'?(
-                <>  <button
-                  onClick={() => handleUpdate(asset._id)}
-                  className="btn bg-green-500 text-white"
-                >
-                  Approved
-                </button>
-                <button
-                  onClick={() => handleDelete(asset._id)}
-                  className="btn bg-orange-600 text-black"
-                >
-                  Reject
-                </button></>
-              ):null}
+                {asset.status === "pending" ? (
+                  <>
+                    {" "}
+                    <button
+                      onClick={() => handleUpdate(asset._id)}
+                      className="btn bg-green-500 text-white"
+                    >
+                      Approved
+                    </button>
+                    <button
+                      onClick={() => handleDelete(asset._id)}
+                      className="btn bg-orange-600 text-black"
+                    >
+                      Reject
+                    </button>
+                  </>
+                ) : null}
               </td>
             </tr>
           ))}

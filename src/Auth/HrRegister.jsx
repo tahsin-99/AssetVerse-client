@@ -63,7 +63,11 @@ const HrRegister = () => {
       console.log(result);
     } catch (err) {
       console.log(err);
+
       toast.error(err?.message);
+      setTimeout(()=>{
+        window.location.reload()
+      },1000)
     }
   };
 
@@ -235,6 +239,17 @@ const HrRegister = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
+
+         <p className="px-6 text-sm text-center text-gray-400">
+                  Want to Join As Employee?{" "}
+                  <Link
+                    to="/employee-register"
+                    className="hover:underline hover:text-blue-600 text-gray-600"
+                  >
+                   Join As Employee 
+                  </Link>
+                  
+                </p>
        
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?{" "}

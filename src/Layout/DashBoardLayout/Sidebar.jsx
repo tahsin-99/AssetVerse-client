@@ -139,12 +139,12 @@ const Sidebar = () => {
                 <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Assets List"
+                    data-tip=" My Assets List"
                     to="/dashboard/assets-list"
                   >
                     <FaListUl />
 
-                    <span className="is-drawer-close:hidden">Assets List</span>
+                    <span className="is-drawer-close:hidden"> My Assets List</span>
                   </NavLink>
                 </li>
 
@@ -209,12 +209,12 @@ const Sidebar = () => {
             </li>
 
             <li>
-              <div
+              <div onClick={handleLogout} 
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Logout"
               >
                 <TbLogout2 />
-                <span onClick={handleLogout} className="is-drawer-close:hidden">
+                <span className="is-drawer-close:hidden">
                   Logout
                 </span>
               </div>

@@ -79,7 +79,8 @@ const AssetsList = () => {
             <th>Product Image</th>
             <th>Product Name</th>
             <th>Product Type</th>
-            <th>Quantity</th>
+            <th>Product Quantity</th>
+            <th>Available Quantity</th>
             <th>Date Added</th>
             <th>actions</th>
           </tr>
@@ -105,7 +106,8 @@ const AssetsList = () => {
               </td>
               <td>{asset.productType}</td>
               <td>{asset.productQuantity}</td>
-              <td>{asset.dateAdded}</td>
+              <td>{asset.availableQuantity}</td>
+              <td>{new Date(asset.dateAdded).toLocaleString()}</td>
               <td>
                 <button
                   onClick={() => setSelectedAsset(asset)}

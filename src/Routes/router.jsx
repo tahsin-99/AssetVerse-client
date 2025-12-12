@@ -17,21 +17,18 @@ import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
 import Loading from "../Components/Loading";
 import Errorpage from "../Components/ErrorPage";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
-    hydrateFallbackElement:<Loading></Loading>,
-    errorElement:<Errorpage></Errorpage>,
+    hydrateFallbackElement: <Loading></Loading>,
+    errorElement: <Errorpage></Errorpage>,
     children: [
       {
         index: true,
         Component: Home,
       },
-
      
-
       {
         path: "/about",
         Component: About,
@@ -45,27 +42,29 @@ export const router = createBrowserRouter([
   },
   {
     path: "/hr-register",
-    Component:HrRegister,
+    Component: HrRegister,
   },
   {
     path: "/login",
     Component: Login,
   },
+  
 
   {
     path: "/dashboard",
     Component: Dashboard,
+    hydrateFallbackElement:<Loading></Loading>,
+    errorElement:<Errorpage></Errorpage>,
     children: [
-     
       {
         path: "add-assets",
         Component: AddAssets,
       },
-       {
+      {
         path: "assets-list",
         Component: AssetsList,
       },
-       {
+      {
         path: "request-assets",
         Component: RequestAssets,
       },
@@ -77,12 +76,12 @@ export const router = createBrowserRouter([
         path: "manage-employees",
         Component: ManageEmployees,
       },
-      
-
-      {
+       {
         path: "payment",
         Component: Payment,
       },
+
+
       {
         path: "profile",
         Component: Profile,

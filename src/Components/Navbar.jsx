@@ -11,9 +11,9 @@ import Loading from "./Loading";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [role,isRoleLoading]=useRole()
-  if(isRoleLoading){
-    return <Loading></Loading>
+  const [role, isRoleLoading] = useRole();
+  if (isRoleLoading) {
+    return <Loading></Loading>;
   }
   return (
     <div>
@@ -30,19 +30,22 @@ const Navbar = () => {
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
                 {
-                  role==='HR'&&
+                  !user &&
                   <>
-                  <NavLink to="/employee-register">Join As Employee</NavLink>
+                   <NavLink to="/employee-register">Join As Employee</NavLink>
+                    <NavLink to="/hr-register">Join As HR Manager</NavLink>
                   </>
                 }
-                {
-                  role==='Employee'&&
+                {role === "HR" && (
                   <>
-                  <NavLink to="/hr-register">Join As HR Manager</NavLink>
+                    <NavLink to="/employee-register">Join As Employee</NavLink>
                   </>
-                } 
-
-                
+                )}
+                {role === "Employee" && (
+                  <>
+                    <NavLink to="/hr-register">Join As HR Manager</NavLink>
+                  </>
+                )}
               </div>
               {/* Dropdown Menu */}
               <div className="relative">
@@ -98,7 +101,6 @@ const Navbar = () => {
                           >
                             Login
                           </Link>
-                         
                         </>
                       )}
                     </div>
