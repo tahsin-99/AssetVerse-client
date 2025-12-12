@@ -16,6 +16,7 @@ import HrRegister from "../Auth/HrRegister";
 import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
 import Loading from "../Components/Loading";
 import Errorpage from "../Components/ErrorPage";
+import PaymentSuccess from "../Pages/PaymentSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
-     
+
       {
         path: "/about",
         Component: About,
@@ -48,13 +49,16 @@ export const router = createBrowserRouter([
     path: "/login",
     Component: Login,
   },
-  
+  {
+    path: "/payment-success",
+    Component: PaymentSuccess,
+  },
 
   {
     path: "/dashboard",
     Component: Dashboard,
-    hydrateFallbackElement:<Loading></Loading>,
-    errorElement:<Errorpage></Errorpage>,
+    hydrateFallbackElement: <Loading></Loading>,
+    errorElement: <Errorpage></Errorpage>,
     children: [
       {
         path: "add-assets",
@@ -76,11 +80,10 @@ export const router = createBrowserRouter([
         path: "manage-employees",
         Component: ManageEmployees,
       },
-       {
+      {
         path: "payment",
         Component: Payment,
       },
-
 
       {
         path: "profile",
