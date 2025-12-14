@@ -17,8 +17,8 @@ const Login = () => {
 
     try {
       //User Login
-      await signIn(email, password);
-
+     const res= await signIn(email, password);
+      console.log(res);
       navigate(location?.state || "/");
       toast.success("Login Successful",{
         autoClose:1000,

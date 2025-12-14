@@ -17,12 +17,13 @@ import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
 import Loading from "../Components/Loading";
 import Errorpage from "../Components/ErrorPage";
 import PaymentSuccess from "../Pages/PaymentSuccess";
+import PrivateRoute from "../Pages/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
-    hydrateFallbackElement: <Loading></Loading>,
+   
     errorElement: <Errorpage></Errorpage>,
     children: [
       {
@@ -56,8 +57,8 @@ export const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    Component: Dashboard,
-    hydrateFallbackElement: <Loading></Loading>,
+   element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+   
     errorElement: <Errorpage></Errorpage>,
     children: [
       {

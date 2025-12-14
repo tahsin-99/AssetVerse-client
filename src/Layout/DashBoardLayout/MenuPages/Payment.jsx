@@ -66,7 +66,7 @@ const Payment = () => {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span> Can Manage Employee {pack.employeeLimit} persons</span>
+                  <span> Can Manage extra {pack.employeeLimit}  Employee </span>
                 </li>
                 <li>
                   <svg

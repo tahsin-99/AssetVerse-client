@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import Loading from '../../../Components/Loading';
 
 const ManageEmployees = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,7 +12,7 @@ const ManageEmployees = () => {
   const navigate=useNavigate()
   
 
-  const { data: assets = [], refetch } = useQuery({
+  const { data: assets = [], refetch,isLoading:assetsLoading } = useQuery({
     queryKey: ["assets", user?.email],
     queryFn: async () => {
       const result = await axiosSecure.get("/request-asset");
@@ -85,6 +86,10 @@ const ManageEmployees = () => {
       }
     });
   };
+
+  if(assetsLoading){
+    return <Loading></Loading>
+  }
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra">

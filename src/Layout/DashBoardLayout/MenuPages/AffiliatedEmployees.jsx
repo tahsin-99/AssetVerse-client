@@ -3,21 +3,35 @@ import useAuth from '../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import Loading from '../../../Components/Loading';
 
 const AffiliatedEmployees = () => {
     const {user}=useAuth()
     const axiosSecure=useAxiosSecure()
 
-    const { data: assets = [] ,refetch} = useQuery({
+    const { data: assets = [] ,refetch,isLoading:assetsLoading} = useQuery({
     queryKey: ["assets", user?.email],
     queryFn: async () => {
-      const result = await axiosSecure.get("/request-asset");
+      const result = await axiosSecure.get("/affiliated-employee");
       return result.data;
     },
+    enabled:!!user
 
   });
-  console.log(assets);
 
+    const { data: hr,refetch:countEmployee } = useQuery({
+    queryKey: ["hr", user?.email],
+    queryFn: async () => {
+      const result = await axiosSecure.get("/user/hr");
+      return result.data;
+    },
+    enabled:!!user
+
+  });
+ 
+if(assetsLoading){
+  return <Loading></Loading>
+}
   const handleRemove=(id)=>{
     Swal.fire({
           title: "Are you sure?",
@@ -30,10 +44,12 @@ const AffiliatedEmployees = () => {
         })
         .then((result)=>{
           if(result.isConfirmed){
-            axiosSecure.delete(`/request-asset/${id}`)
+            axiosSecure.delete(`/affiliated-employee/${id}`)
             .then((res)=>{
               if (res.data.deletedCount) {
+                
                           refetch();
+                          countEmployee()
                           Swal.fire({
                             title: "Removed!",
                             text: "Employee has been removed.",
@@ -46,6 +62,7 @@ const AffiliatedEmployees = () => {
   }
     return (
         <div className="overflow-x-auto">
+          <h1 className='text-4xl font-semibold mb-5'>Employee Count:  {hr?.currentEmployees ?? 0}/{ (hr?.packageLimit ?? 0)}</h1>
   <table className="table table-zebra">
    
     <thead>

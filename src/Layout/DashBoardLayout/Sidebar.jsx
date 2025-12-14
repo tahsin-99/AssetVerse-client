@@ -119,6 +119,20 @@ const Sidebar = () => {
                     </span>
                   </NavLink>
                 </li>
+                <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Profile"
+                to="/dashboard/profile"
+              >
+                <CgProfile />
+
+                <span className="is-drawer-close:hidden">
+                  <p>Profile</p>
+                </span>
+              </NavLink>
+            </li>
+
               </>
             )}
 
@@ -194,20 +208,7 @@ const Sidebar = () => {
               </>
             )}
 
-            <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Profile"
-                to="/dashboard/profile"
-              >
-                <CgProfile />
-
-                <span className="is-drawer-close:hidden">
-                  <p>Profile</p>
-                </span>
-              </NavLink>
-            </li>
-
+            
             <li>
               <div onClick={handleLogout} 
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
