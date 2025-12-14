@@ -114,7 +114,7 @@ const AddAssets = () => {
               >
                 <option disabled={true}>Select One</option>
                 <option >Returnable</option>
-                <option >Non-returable</option>
+                <option >Non-returnable</option>
               </select>
             </fieldset>
 

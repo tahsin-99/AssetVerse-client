@@ -9,21 +9,26 @@ const MyAssets = () => {
   const { user } = useAuth();
 const [searchText,setSearchText]=useState('')
 const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [assetTypeFilter, setAssetTypeFilter] = useState("");
 
 useEffect(() => {
   const timer = setTimeout(() => {
     setDebouncedSearch(searchText);
-  }, 200); 
+  }, 800); 
 
   return () => clearTimeout(timer);
 }, [searchText]);
 
 
   const { data: myAssets = [], isLoading } = useQuery({
-    queryKey: ["my-assets",debouncedSearch],
+    queryKey: ["my-assets",debouncedSearch,assetTypeFilter],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/my-assets?searchText=${debouncedSearch}`);
+      let url = `/my-assets?searchText=${debouncedSearch}`;
+      if(assetTypeFilter){
+        url +=`&assetType=${assetTypeFilter}`
+      }
+      const res =await axiosSecure.get(url)
       return res.data;
     },
   });
@@ -35,7 +40,10 @@ useEffect(() => {
       <h1 className="text-4xl font-bold">My Assets:</h1>
       
 
-      <label className="input my-5" >
+    <div className="flex justify-between items-center">
+         <div>
+         <label className="input my-5" >
+
         <svg
           className="h-[1em] opacity-50 "
           xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +62,20 @@ useEffect(() => {
         </svg>
         <input  onChange={(e)=>setSearchText(e.target.value)} type="search" value={searchText} required placeholder="Search Asset" />
       </label>
+     </div>
+
+       <div>
+        <select
+        value={assetTypeFilter}
+        onChange={(e) => setAssetTypeFilter(e.target.value)}
+        className="select select-bordered my-2"
+      >
+        <option value="">All Types</option>
+        <option value="Returnable">Returnable</option>
+        <option value="Non-returnable">Non-returnable</option>
+      </select>
+       </div>
+    </div>
 
       <table className="table table-zebra">
         <thead>
@@ -90,7 +112,7 @@ useEffect(() => {
                 {asset.status === "approved" &&
                   asset.productType === "Returnable" && (
                     <>
-                      <button className="btn bg-red-600 text-white">
+                      <button className="btn bg-blue-800 text-white">
                         Return
                       </button>
                     </>
