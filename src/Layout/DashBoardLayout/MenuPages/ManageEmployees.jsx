@@ -115,7 +115,7 @@ const ManageEmployees = () => {
               <td>{asset.employeeEmail}</td>
               <td>{asset.productName}</td>
               <td>{asset.quantity}</td>
-              <td>{new Date(asset.date).toLocaleString()}</td>
+              <td>{new Date(asset.requestDate).toLocaleString()}</td>
               {asset.status === "pending" ? (
                 <td className="text-yellow-400    items-center font-semibold">
                   <span className="badge badge-outline">Pending</span>

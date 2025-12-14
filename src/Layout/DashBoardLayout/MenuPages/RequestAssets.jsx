@@ -17,12 +17,12 @@ const RequestAssets = () => {
   });
 
   const [selectedAsset, setSelectedAsset] = useState(null);
-  const [employeeName, setEmployeeName] = useState("");
+  
   const [quantity, setQuantity] = useState(1);
 
   const openModal = (asset) => {
     setSelectedAsset(asset);
-    setEmployeeName("");
+    
     setQuantity(1);
   };
   const submitRequest = async (e) => {
@@ -32,7 +32,8 @@ const RequestAssets = () => {
     try {
       const requestData = {
         productId: selectedAsset._id,
-        employeeName,
+        employeeName:user.displayName,
+         employeeImage: user.photoURL || user.image || "",
         quantity: Number(quantity),
       };
 
@@ -104,11 +105,13 @@ const RequestAssets = () => {
               <input
                 name="employeeName"
                 type="text"
-                value={employeeName}
-                onChange={(e) => setEmployeeName(e.target.value)}
+                value={user.displayName}
+               
                 required
                 className="input input-bordered w-full"
                 placeholder="Employee Name"
+                readOnly
+                
               />
 
               <input

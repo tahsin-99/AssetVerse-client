@@ -3,6 +3,9 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Components/Loading";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
 
 const MyAssets = () => {
   const axiosSecure = useAxiosSecure();
@@ -32,9 +35,49 @@ useEffect(() => {
       return res.data;
     },
   });
+  
+  const handleDownLoad=()=>{
+    const doc=new jsPDF()
+
+
+     const columns = [
+    "Asset Name",
+    "Asset Type",
+    "Company",
+    "Request Date",
+    "Approval Date",
+    "Status",
+  ];
+  const rows=myAssets.map((asset)=>{
+
+ 
+  let approvalDateStr = "—";
+  if(asset.approvalDate){
+    approvalDateStr=new Date(assetTypeFilter.approvalDate).toLocaleString()
+  }
+  return [
+    asset.productName,
+    asset.productType,
+    asset.companyName,
+    new Date(asset.requestDate).toLocaleString(),
+    approvalDateStr,
+    asset.status,
+  ]
+   })
+   autoTable(doc,{
+    startY: 25,
+    head: [columns],
+    body: rows,
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [22, 160, 133] },
+  });
+
+  doc.save("my-assets.pdf");
+  }
   if (isLoading) {
     return <Loading></Loading>;
   }
+
   return (
     <div>
       <h1 className="text-4xl font-bold">My Assets:</h1>
@@ -122,8 +165,10 @@ useEffect(() => {
           ))}
         </tbody>
       </table>
+      <button onClick={handleDownLoad} className="btn bg-green-700 text-white">Download PDF</button>
     </div>
   );
 };
 
 export default MyAssets;
+

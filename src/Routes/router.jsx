@@ -17,8 +17,9 @@ import AssetsList from "../Layout/DashBoardLayout/MenuPages/AssetsList";
 import Loading from "../Components/Loading";
 import Errorpage from "../Components/ErrorPage";
 import PaymentSuccess from "../Pages/PaymentSuccess";
-import PrivateRoute from "../Pages/PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import MyAssets from "../Layout/DashBoardLayout/MenuPages/MyAssets";
+import MyTeamPage from "../Layout/DashBoardLayout/MenuPages/MyTeamPage";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
         path:'my-assets',
         Component:MyAssets
 
+      },
+      {
+        path:'my-team',
+        Component:MyTeamPage
       },
       {
         path: "payment",
