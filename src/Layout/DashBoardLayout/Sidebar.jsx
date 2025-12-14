@@ -1,6 +1,6 @@
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/images/logo.png";
-import { BsGraphUp } from "react-icons/bs";
+import { BsBoxSeam, BsGraphUp } from "react-icons/bs";
 import { FcSettings } from "react-icons/fc";
 import { Link, NavLink, useNavigate } from "react-router";
 import { AiOutlineBars } from "react-icons/ai";
@@ -105,6 +105,20 @@ const Sidebar = () => {
 
             {role === "Employee" && (
               <>
+               <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip=" My Assets"
+                    to="/dashboard/my-assets"
+                  >
+                   <BsBoxSeam className=" " />
+
+                    <span className="is-drawer-close:hidden">
+                      {" "}
+                      My Assets
+                    </span>
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"

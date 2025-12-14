@@ -18,12 +18,13 @@ import Loading from "../Components/Loading";
 import Errorpage from "../Components/ErrorPage";
 import PaymentSuccess from "../Pages/PaymentSuccess";
 import PrivateRoute from "../Pages/PrivateRoute";
+import MyAssets from "../Layout/DashBoardLayout/MenuPages/MyAssets";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomeLayout,
-   
+   hydrateFallbackElement:<Loading></Loading>,
     errorElement: <Errorpage></Errorpage>,
     children: [
       {
@@ -58,7 +59,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-   
+   hydrateFallbackElement:<Loading></Loading>,
     errorElement: <Errorpage></Errorpage>,
     children: [
       {
@@ -80,6 +81,11 @@ export const router = createBrowserRouter([
       {
         path: "manage-employees",
         Component: ManageEmployees,
+      },
+      {
+        path:'my-assets',
+        Component:MyAssets
+
       },
       {
         path: "payment",

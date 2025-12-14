@@ -23,6 +23,7 @@ const ManageEmployees = () => {
   const handleUpdate = (id) => {
     const updatedData = {
       status: "approved",
+      approvalDate:new Date()
     };
     axiosSecure
       .patch(`/request-asset/${id}`, updatedData)

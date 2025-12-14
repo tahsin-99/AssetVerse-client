@@ -1,0 +1,107 @@
+import React, { useEffect, useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../Components/Loading";
+
+const MyAssets = () => {
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+const [searchText,setSearchText]=useState('')
+const [debouncedSearch, setDebouncedSearch] = useState("");
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setDebouncedSearch(searchText);
+  }, 200); 
+
+  return () => clearTimeout(timer);
+}, [searchText]);
+
+
+  const { data: myAssets = [], isLoading } = useQuery({
+    queryKey: ["my-assets",debouncedSearch],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-assets?searchText=${debouncedSearch}`);
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  return (
+    <div>
+      <h1 className="text-4xl font-bold">My Assets:</h1>
+      
+
+      <label className="input my-5" >
+        <svg
+          className="h-[1em] opacity-50 "
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
+        <input  onChange={(e)=>setSearchText(e.target.value)} type="search" value={searchText} required placeholder="Search Asset" />
+      </label>
+
+      <table className="table table-zebra">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Asset Image</th>
+            <th>Asset Name</th>
+            <th>Asset Type</th>
+            <th>Company Name</th>
+            <th>Request Date</th>
+            <th>Status</th>
+            <th>Approval Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {myAssets.map((asset, index) => (
+            <tr key={asset._id}>
+              <th>{index + 1}</th>
+              <td>
+                <img
+                  className="w-15 rounded-full"
+                  src={asset.productImage}
+                  alt=""
+                />
+              </td>
+              <td>{asset.productName}</td>
+              <td>{asset.productType}</td>
+              <td>{asset.companyName}</td>
+              <td>{new Date(asset.requestDate).toLocaleString()}</td>
+              <td>{asset.status}</td>
+              <td>{new Date(asset.approvalDate).toLocaleString()}</td>
+              <td>
+                {asset.status === "approved" &&
+                  asset.productType === "Returnable" && (
+                    <>
+                      <button className="btn bg-red-600 text-white">
+                        Return
+                      </button>
+                    </>
+                  )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default MyAssets;
