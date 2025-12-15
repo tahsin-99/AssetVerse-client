@@ -7,7 +7,7 @@ const ContactCTA = () => {
   return (
     <>
       {!user && (
-        <section className="py-16 bg-blue-600 text-white text-center mt-20">
+        <section className="py-16 bg-black text-white text-center mt-100">
           <div className="container mx-auto px-5">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Ready to streamline your asset management?

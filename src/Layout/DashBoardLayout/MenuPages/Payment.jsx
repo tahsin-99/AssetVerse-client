@@ -32,13 +32,13 @@ const Payment = () => {
   };
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center mt-30 ">Packages</h1>
+      <h1 className="text-5xl font-bold text-center mt-30  ">Packages</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mt-30 p-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mt-30 px-2">
         {packages.map((pack) => (
           <div
             key={pack._id}
-            className="card w-96  shadow-sm h-full pb-20 px-5 text-white bg-[#214d80] mx-auto"
+            className="card w-full  shadow-sm h-full pb-20 px-5 text-white bg-[#214d80] mx-auto"
           >
             <div className="card-body">
               {pack.name === "Standard" && (

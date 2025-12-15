@@ -13,7 +13,7 @@ const axiosSecure=useAxiosSecure()
   })
   console.log(packages);
   return (
-    <div>
+    <div className="mt-100">
       <h1 className="text-6xl font-bold text-center mt-30">Packages Section</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-30">

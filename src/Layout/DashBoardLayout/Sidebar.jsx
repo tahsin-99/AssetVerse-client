@@ -77,34 +77,25 @@ const Sidebar = () => {
                 <img src={logo} className="w-30 " alt="" />
               </Link>
             </li>
-            <li>
-              <Link
-                to="/dashboard"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Homepage"
-              >
-                {/* Home icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                </svg>
-                <span className="is-drawer-close:hidden">Homepage</span>
-              </Link>
-            </li>
-
+           
             {/* Dashboard links */}
 
             {role === "Employee" && (
               <>
+               <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip=" Request Assets"
+                    to="/dashboard/request-assets"
+                  >
+                    <IoGitPullRequestSharp />
+
+                    <span className="is-drawer-close:hidden">
+                      {" "}
+                      Request Assets
+                    </span>
+                  </NavLink>
+                </li>
                <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -134,39 +125,27 @@ const Sidebar = () => {
                     </span>
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip=" Request Assets"
-                    to="/dashboard/request-assets"
-                  >
-                    <IoGitPullRequestSharp />
-
-                    <span className="is-drawer-close:hidden">
-                      {" "}
-                      Request Assets
-                    </span>
-                  </NavLink>
-                </li>
-                <li>
-              <NavLink
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Profile"
-                to="/dashboard/profile"
-              >
-                <CgProfile />
-
-                <span className="is-drawer-close:hidden">
-                  <p>Profile</p>
-                </span>
-              </NavLink>
-            </li>
+               
+               
 
               </>
             )}
 
             {role === "HR" && (
               <>
+                
+
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip=" My Assets List"
+                    to="/dashboard/assets-list"
+                  >
+                    <FaListUl />
+
+                    <span className="is-drawer-close:hidden"> My Assets List</span>
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -182,25 +161,13 @@ const Sidebar = () => {
                 <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip=" My Assets List"
-                    to="/dashboard/assets-list"
-                  >
-                    <FaListUl />
-
-                    <span className="is-drawer-close:hidden"> My Assets List</span>
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Manage Employees"
+                    data-tip="All Requests"
                     to="/dashboard/manage-employees"
                   >
                     <GrUserManager />
 
                     <span className="is-drawer-close:hidden">
-                      Manage Employees
+                     All Requests
                     </span>
                   </NavLink>
                 </li>
@@ -208,13 +175,13 @@ const Sidebar = () => {
                 <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Affiliated Employees"
+                    data-tip="My Employee List"
                     to="/dashboard/affiliated-employees"
                   >
                     <FaTasks></FaTasks>
 
                     <span className="is-drawer-close:hidden">
-                      Affiliated Employees
+                      My Employee List
                     </span>
                   </NavLink>
                 </li>
@@ -223,20 +190,33 @@ const Sidebar = () => {
                 <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Payment"
+                    data-tip="Upgrade Package"
                     to="/dashboard/payment"
                   >
                     <MdOutlinePayment />
 
                     <span className="is-drawer-close:hidden">
                       {" "}
-                      Payment History
+                      Upgrade Package
                     </span>
                   </NavLink>
                 </li>
               </>
             )}
 
+             <li>
+              <NavLink
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Profile"
+                to="/dashboard/profile"
+              >
+                <CgProfile />
+
+                <span className="is-drawer-close:hidden">
+                  <p>Profile</p>
+                </span>
+              </NavLink>
+            </li>
             
             <li>
               <div onClick={handleLogout} 

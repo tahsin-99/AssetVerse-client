@@ -6,13 +6,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
 import axios from "axios";
+import useRole from "../../../hooks/useRole";
 
 const Profile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState(""); 
+  const [name, setName] = useState("");
   const [image, setImage] = useState(null);
+  const [role] = useRole();
 
   const {
     data: employee,
@@ -45,7 +47,7 @@ const Profile = () => {
           }`,
           formData
         );
-         imageURL = res?.data?.data?.display_url;
+        imageURL = res?.data?.data?.display_url;
       }
       await axiosSecure.patch("/profile", {
         name,
@@ -59,18 +61,15 @@ const Profile = () => {
     }
   };
 
-  
-
-
-// Fetch company affiliations
-const { data: companies = [], isLoading: isCompaniesLoading } = useQuery({
-  queryKey: ['myCompanies', user?.email],
-  enabled: !!user?.email,
-  queryFn: async () => {
-    const res = await axiosSecure.get('/my-companies');
-    return res.data; 
-  },
-});
+  // Fetch company affiliations
+  const { data: companies = [], isLoading: isCompaniesLoading } = useQuery({
+    queryKey: ["myCompanies", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get("/my-companies");
+      return res.data;
+    },
+  });
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -92,21 +91,28 @@ const { data: companies = [], isLoading: isCompaniesLoading } = useQuery({
         <p className="text-gray-400 mb-6">
           {employee?.email || "No Email Found"}
         </p>
-        <p className="mt-2">
-  Company affiliations:
-  {isCompaniesLoading ? (
-    <span> Loading...</span>
-  ) : companies.length > 0 ? (
-    companies.map((c, index) => (
-      <span key={index} className="text-orange-500 font-semibold ml-2">
-        {c}{index < companies.length - 1 ? ',' : ''}
-      </span>
-    ))
-  ) : (
-    <span className="text-gray-400 ml-2">No affiliations</span>
-  )}
-</p>
-
+        {role === "Employee" && (
+          <>
+            <p className="mt-2">
+              Company affiliations:
+              {isCompaniesLoading ? (
+                <span> Loading...</span>
+              ) : companies.length > 0 ? (
+                companies.map((c, index) => (
+                  <span
+                    key={index}
+                    className="text-orange-500 font-semibold ml-2"
+                  >
+                    {c}
+                    {index < companies.length - 1 ? "," : ""}
+                  </span>
+                ))
+              ) : (
+                <span className="text-gray-400 ml-2">No affiliations</span>
+              )}
+            </p>
+          </>
+        )}
 
         <button
           onClick={openModal}
@@ -124,7 +130,9 @@ const { data: companies = [], isLoading: isCompaniesLoading } = useQuery({
             <h3 className="font-bold text-lg">Update Profile</h3>
 
             <form onSubmit={handleUpdateProfile} className="space-y-3 mt-4">
-              <label className="text-black text-xl font-semibold">Update Your Name</label>
+              <label className="text-black text-xl font-semibold">
+                Update Your Name
+              </label>
               <input
                 type="text"
                 value={name}
@@ -133,7 +141,10 @@ const { data: companies = [], isLoading: isCompaniesLoading } = useQuery({
                 className="input input-bordered w-full text-black"
                 placeholder="Your Name"
               />
-              <label className="text-black text-xl font-semibold"> Upload New Image:</label>
+              <label className="text-black text-xl font-semibold">
+                {" "}
+                Upload New Image:
+              </label>
               <input
                 type="file"
                 accept="image/*"

@@ -71,6 +71,9 @@ const AssetsList = () => {
   
 
   return (
+
+    <>
+    <h1 className="text-4xl font-bold m-6">Assets List:</h1>
     <div className="overflow-x-auto border-2 border-blue-800 rounded">
       <table className="table">
         <thead>
@@ -174,7 +177,9 @@ const AssetsList = () => {
           </div>
         </dialog>
       )}
+
     </div>
+    </>
   );
 };
 

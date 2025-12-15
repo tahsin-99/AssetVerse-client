@@ -54,7 +54,7 @@ const Footer = () => {
             <div>
               <MdEmail className="text-black" />
             </div>
-            <div>assetverse@gmail.com</div>
+            <div><a href="https://mail.google.com/"  target="_blank">assetverse@gmail.com</a></div>
           </div>
 
           <div className="flex  items-center space-x-2 text-gray-300">
@@ -70,13 +70,13 @@ const Footer = () => {
           <h3 className="font-semibold ">Social Links</h3>
           <div className="text-gray-300 space-y-2">
             <img src={xImg} alt="" />
-            <a href="https://x.com/">AssetVerse System</a>
+            <a href="https://x.com/"  target="_blank">AssetVerse System</a>
             <img src={inImg} alt="" />
-            <a href="https://www.linkedin.com/">AssetVerse System</a>
+            <a href="https://www.linkedin.com/"  target="_blank">AssetVerse System</a>
             <img src={fImg} alt="" />
-            <a href="https://www.facebook.com/">AssetVerse System</a>
+            <a href="https://www.facebook.com/"  target="_blank">AssetVerse System</a>
             <img src={mImg} alt="" />
-            <a href="https://mail.google.com/">support@cst.com</a>
+            <a href="https://mail.google.com/"  target="_blank">support@cst.com</a>
           </div>
         </div>
       </div>

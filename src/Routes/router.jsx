@@ -20,6 +20,9 @@ import PaymentSuccess from "../Pages/PaymentSuccess";
 import PrivateRoute from "./PrivateRoute";
 import MyAssets from "../Layout/DashBoardLayout/MenuPages/MyAssets";
 import MyTeamPage from "../Layout/DashBoardLayout/MenuPages/MyTeamPage";
+import HrRoute from "./HrRoute";
+import EmployeeRoute from "./EmployeeRoute";
+import DashBoardHome from "../Layout/DashBoardLayout/DashBoardHome";
 
 export const router = createBrowserRouter([
   {
@@ -60,46 +63,59 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-   hydrateFallbackElement:<Loading></Loading>,
-    errorElement: <Errorpage></Errorpage>,
+   
+    
     children: [
+    
       {
-        path: "add-assets",
-        Component: AddAssets,
+       index:true,
+        element:<PrivateRoute><DashBoardHome></DashBoardHome></PrivateRoute>
       },
-      {
-        path: "assets-list",
-        Component: AssetsList,
+       {
+      path: "assets-list",
+      element: (
+        <PrivateRoute>
+          <HrRoute>
+            <AssetsList />
+          </HrRoute>
+        </PrivateRoute>
+      )
+    },
+
+        {
+        path: "add-assets",
+         element:<PrivateRoute><HrRoute><AddAssets></AddAssets></HrRoute></PrivateRoute>
       },
       {
         path: "request-assets",
-        Component: RequestAssets,
+       element:<PrivateRoute><EmployeeRoute><RequestAssets></RequestAssets></EmployeeRoute></PrivateRoute>
       },
       {
         path: "affiliated-employees",
-        Component: AffiliatedEmployees,
+        element:<PrivateRoute><HrRoute><AffiliatedEmployees></AffiliatedEmployees></HrRoute></PrivateRoute>
       },
       {
         path: "manage-employees",
-        Component: ManageEmployees,
+         element:<PrivateRoute><HrRoute><ManageEmployees></ManageEmployees></HrRoute></PrivateRoute>
       },
       {
         path:'my-assets',
-        Component:MyAssets
+        element:<PrivateRoute><EmployeeRoute><MyAssets></MyAssets></EmployeeRoute></PrivateRoute>
 
       },
       {
         path:'my-team',
-        Component:MyTeamPage
+        element:<PrivateRoute><EmployeeRoute><MyTeamPage></MyTeamPage></EmployeeRoute></PrivateRoute>
+
       },
       {
         path: "payment",
-        Component: Payment,
+        element:<PrivateRoute><HrRoute><Payment></Payment></HrRoute></PrivateRoute>
       },
 
       {
         path: "profile",
-        Component: Profile,
+       element:<PrivateRoute><Profile></Profile></PrivateRoute>
       },
     ],
   },

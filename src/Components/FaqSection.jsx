@@ -19,7 +19,7 @@ const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="py-16 bg-white mt-20">
+    <section className="py-16 bg-[#1B3B5F] text-white mt-100">
       <div className="container mx-auto px-5">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Frequently Asked Questions
@@ -36,7 +36,7 @@ const FaqSection = () => {
                 <span>{openIndex === idx ? "-" : "+"}</span>
               </button>
               {openIndex === idx && (
-                <p className="px-6 py-4 text-gray-600 border-t">{faq.answer}</p>
+                <p className="px-6 py-4 text-yellow-500 border-t">{faq.answer}</p>
               )}
             </div>
           ))}

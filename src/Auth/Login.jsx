@@ -89,7 +89,7 @@ const Login = () => {
               {loading ? (
                 <span className="loading loading-bars loading-xs"></span>
               ) : (
-                "Continue"
+                "Login"
               )}
             </button>
           </div>

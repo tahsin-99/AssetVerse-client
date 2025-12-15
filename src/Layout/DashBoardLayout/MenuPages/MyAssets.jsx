@@ -79,7 +79,7 @@ useEffect(() => {
   }
 
   return (
-    <div>
+    <div >
       <h1 className="text-4xl font-bold">My Assets:</h1>
       
 

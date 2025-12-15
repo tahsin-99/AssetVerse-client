@@ -68,7 +68,7 @@ const MyTeamPage = () => {
         {team.map(member => (
           <div
             key={member.employeeEmail}
-            className="card p-4 shadow border bg-base-100"
+            className="card p-4 shadow border bg-green-200"
           >
             <img
               src={member.employeeImage}

@@ -33,13 +33,13 @@ const Navbar = () => {
       <div className="fixed w-full bg-white z-10 shadow-sm">
         <div className="py-4 ">
           <Container>
-            <div className="flex flex-row  items-center justify-between gap-3 md:gap-0">
+            <div className="flex items-center justify-between gap-3  md:gap-0">
               {/* Logo */}
               <Link to="/" className="flex items-center-safe ">
-                <img src={logo} alt="" className="w-30" />
-                <p className="text-5xl font-bold">AssetVerse</p>
+                <img src={logo} alt="" className="w-20 sm:w-30" />
+                <p className="text-2xl sm:text-5xl font-bold ">AssetVerse</p>
               </Link>
-              <div className="flex flex-row gap-4 font-bold">
+              <div className="hidden md:flex gap-4 font-bold">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
                 {
@@ -62,7 +62,7 @@ const Navbar = () => {
               </div>
               {/* Dropdown Menu */}
               <div className="relative">
-                <div className="flex flex-row items-center gap-3">
+                <div className="flex flex-col md:flex-row items-center gap-3">
                   {/* Dropdown btn */}
                   <div
                     onClick={() => setIsOpen(!isOpen)}
@@ -100,7 +100,7 @@ const Navbar = () => {
                             Logout
                           </div>
                           <Link
-                            to="/profile"
+                            to="/dashboard/profile"
                             className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                           >
                             Profile

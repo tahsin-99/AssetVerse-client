@@ -38,13 +38,13 @@ const stats = [
 ];
 const Testimonials = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16  bg-blue-300 mt-100">
       <div className="container mx-auto px-5">
         <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 mt-50">
           What Our Clients Say & Key Stats
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 ">
           {testimonials.map((item, index) => (
             <div
               key={index}

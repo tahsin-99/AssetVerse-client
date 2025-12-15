@@ -37,7 +37,7 @@ const ManageEmployees = () => {
         refetch();
       })
       .catch((err) => {
-        // Check if payment/upgrade is required
+        
         const paymentRequired = err.response?.data?.paymentRequired;
 
         if (paymentRequired) {
@@ -91,9 +91,12 @@ const ManageEmployees = () => {
   if(assetsLoading){
     return <Loading></Loading>
   }
+
   return (
+    <>
+    <h1 className="text-3xl sm:text-5xl font-bold m-6">All Requests:</h1>
     <div className="overflow-x-auto">
-      <table className="table table-zebra">
+      <table className="table table-zebra border-2 border-blue-800 px-2">
         {/* head */}
         <thead>
           <tr>
@@ -150,6 +153,7 @@ const ManageEmployees = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

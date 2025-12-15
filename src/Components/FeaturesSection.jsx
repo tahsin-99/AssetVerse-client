@@ -23,7 +23,7 @@ const FeaturesSection = () => {
   })
   
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50 mt-100">
       <div className="container mx-auto px-5">
 
         <h2 className="text-5xl md:text-5xl font-bold text-center mb-12 mt-50">

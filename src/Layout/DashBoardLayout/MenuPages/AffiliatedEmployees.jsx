@@ -63,7 +63,7 @@ if(assetsLoading){
     return (
         <div className="overflow-x-auto">
           <h1 className='text-4xl font-semibold mb-5'>Employee Count:  {hr?.currentEmployees ?? 0}/{ (hr?.packageLimit ?? 0)}</h1>
-  <table className="table table-zebra">
+  <table className="table table-zebra border-2 border-blue-800 px-2">
    
     <thead>
       <tr>

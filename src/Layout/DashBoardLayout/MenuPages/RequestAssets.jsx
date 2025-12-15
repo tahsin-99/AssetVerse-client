@@ -59,11 +59,13 @@ const RequestAssets = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 items-center justify-center">
+    <>
+  <h1 className="text-4xl font-bold m-6">Request Asset:</h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 items-center justify-center ">
       {assets.map((asset) => (
         <div
           key={asset._id}
-          className="card bg-base-100 w-96 shadow-sm border-2 border-blue-800"
+          className="card bg-base-100 shadow-sm border-2 border-blue-800 w-full"
         >
           <figure>
             <img className="w-300 h-60 " src={asset.productImage} alt="Shoes" />
@@ -163,6 +165,7 @@ const RequestAssets = () => {
         </dialog>
       )}
     </div>
+    </>
   );
 };
 
