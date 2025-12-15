@@ -23,7 +23,7 @@ const EmployeeRegister = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { name, image, email, password, joiningDate } = data;
+    const { name, image, email, password, birthDate } = data;
 
     const imageFile = image[0];
     
@@ -41,16 +41,16 @@ const EmployeeRegister = () => {
 
       const imageURL = data?.data?.data?.display_url;
 
-      //2. User Registration
+     
       const result = await createUser(email, password);
 
-      //3. Save username & profile photo
+      
       await updateUserProfile(name, imageURL);
       await axiosSecure.post("/users", {
         name,
         image: imageURL,
         email,
-        joiningDate,
+        birthDate,
         role: "Employee",
       });
 
@@ -186,7 +186,7 @@ const EmployeeRegister = () => {
           <div>
             <label>Date of Birth</label>
             <input
-              {...register("joiningDate", {
+              {...register("birthDate", {
                 required: "Date is required",
               })}
               type="date"

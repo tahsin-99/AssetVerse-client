@@ -7,11 +7,24 @@ import unknown from "../assets/images/unknownUser.png";
 import logo from "../assets/images/logo.png";
 import useRole from "../hooks/useRole";
 import Loading from "./Loading";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [role, isRoleLoading] = useRole();
+  const axiosSecure=useAxiosSecure()
+
+  
+  const { data: users } = useQuery({
+  queryKey: ["profile", user?.email],
+  enabled: !!user?.email,
+  queryFn: async () => {
+    const res = await axiosSecure.get("/profile");
+    return res.data; 
+  },
+});
   if (isRoleLoading) {
     return <Loading></Loading>;
   }
@@ -61,7 +74,7 @@ const Navbar = () => {
                       <img
                         className="rounded-full"
                         referrerPolicy="no-referrer"
-                        src={user && user.photoURL ? user.photoURL : unknown}
+                        src={users?.image? users.image : unknown}
                         alt="profile"
                         height="30"
                         width="30"

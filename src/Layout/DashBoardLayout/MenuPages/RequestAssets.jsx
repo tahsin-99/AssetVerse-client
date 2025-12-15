@@ -7,6 +7,16 @@ import { toast } from "react-toastify";
 const RequestAssets = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  
+
+  const { data: employee } = useQuery({
+  queryKey: ["profile", user?.email],
+  enabled: !!user?.email,
+  queryFn: async () => {
+    const res = await axiosSecure.get("/profile");
+    return res.data; 
+  },
+});
 
   const { data: assets = [], refetch } = useQuery({
     queryKey: ["assets"],
@@ -35,6 +45,7 @@ const RequestAssets = () => {
         employeeName:user.displayName,
          employeeImage: user.photoURL || user.image || "",
         quantity: Number(quantity),
+        birthDate:employee.birthDate,
       };
 
       await axiosSecure.post("/request-asset", requestData);

@@ -23,7 +23,7 @@ const HrRegister = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { name, companyName, image, email, password, joiningDate } = data;
+    const { name, companyName, image, email, password, birthDate } = data;
 
     const imageFile = image[0];
     console.log(data);
@@ -51,7 +51,7 @@ const HrRegister = () => {
         companyName,
         image: imageURL,
         email,
-        joiningDate,
+        birthDate,
         role: "HR",
         packageLimit: 5,
         currentEmployees: 0,
@@ -211,7 +211,7 @@ const HrRegister = () => {
           <div>
             <label>Date of Birth</label>
             <input
-              {...register("joiningDate", {
+              {...register("birthDate", {
                 required: "Date is required",
               })}
               type="date"
