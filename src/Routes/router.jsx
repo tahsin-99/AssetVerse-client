@@ -23,6 +23,7 @@ import MyTeamPage from "../Layout/DashBoardLayout/MenuPages/MyTeamPage";
 import HrRoute from "./HrRoute";
 import EmployeeRoute from "./EmployeeRoute";
 import DashBoardHome from "../Layout/DashBoardLayout/DashBoardHome";
+import Analytics from "../Layout/DashBoardLayout/MenuPages/Analytics";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-employees",
          element:<PrivateRoute><HrRoute><ManageEmployees></ManageEmployees></HrRoute></PrivateRoute>
+      },
+      {
+        path:'analytics',
+        element:<PrivateRoute><HrRoute><Analytics></Analytics></HrRoute></PrivateRoute>
       },
       {
         path:'my-assets',

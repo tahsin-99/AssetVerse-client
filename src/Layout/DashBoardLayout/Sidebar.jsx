@@ -5,7 +5,7 @@ import { FcSettings } from "react-icons/fc";
 import { Link, NavLink, useNavigate } from "react-router";
 import { AiOutlineBars } from "react-icons/ai";
 import { RiTeamFill } from "react-icons/ri";
-import { GrLogout, GrUserManager, GrUserWorker } from "react-icons/gr";
+import { GrAnalytics, GrLogout, GrUserManager, GrUserWorker } from "react-icons/gr";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { MdFormatListBulletedAdd, MdOutlinePayment } from "react-icons/md";
 import { FaListUl, FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
@@ -144,6 +144,19 @@ const Sidebar = () => {
                     <FaListUl />
 
                     <span className="is-drawer-close:hidden"> My Assets List</span>
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip=" Analytics"
+                    to="/dashboard/analytics"
+                  >
+                    <GrAnalytics />
+
+
+                    <span className="is-drawer-close:hidden">Analytics</span>
                   </NavLink>
                 </li>
                 <li>
