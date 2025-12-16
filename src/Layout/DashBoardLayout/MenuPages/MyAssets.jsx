@@ -80,6 +80,7 @@ useEffect(() => {
 
   return (
     <div >
+      <title>AssetVerse |My Assets</title>
       <h1 className="text-4xl font-bold">My Assets:</h1>
       
 

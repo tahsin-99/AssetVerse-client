@@ -41,10 +41,10 @@ const HrRegister = () => {
 
       const imageURL = data?.data?.data?.display_url;
 
-      //2. User Registration
+    
       const result = await createUser(email, password);
 
-      //3. Save username & profile photo
+      
       await updateUserProfile(name, imageURL);
       await axiosSecure.post("/users", {
         name,
@@ -73,6 +73,8 @@ const HrRegister = () => {
 
   
   return (
+    <>
+    <title>AssetVerse</title>
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
@@ -130,7 +132,7 @@ const HrRegister = () => {
                 </p>
               )}
             </div>
-            {/* Image */}
+            
             <div>
               <label
                 htmlFor="image"
@@ -263,6 +265,7 @@ const HrRegister = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 

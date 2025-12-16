@@ -72,7 +72,7 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Stats */}
+        
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
           {stats.map((stat, idx) => (
             <div key={idx} className="bg-white p-6 rounded-xl shadow">

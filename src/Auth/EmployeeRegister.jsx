@@ -69,6 +69,8 @@ const EmployeeRegister = () => {
   
 
   return (
+    <>
+    <title>AssetVerse |Employee Registration</title>
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
@@ -105,7 +107,7 @@ const EmployeeRegister = () => {
               )}
             </div>
 
-            {/* Image */}
+            
             <div>
               <label
                 htmlFor="image"
@@ -237,6 +239,7 @@ const EmployeeRegister = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 

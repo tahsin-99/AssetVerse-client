@@ -1,16 +1,16 @@
 import useAuth from "../../hooks/useAuth";
 import logo from "../../assets/images/logo.png";
-import { BsBoxSeam, BsGraphUp } from "react-icons/bs";
-import { FcSettings } from "react-icons/fc";
+import { BsBoxSeam } from "react-icons/bs";
+
 import { Link, NavLink, useNavigate } from "react-router";
-import { AiOutlineBars } from "react-icons/ai";
+
 import { RiTeamFill } from "react-icons/ri";
-import { GrAnalytics, GrLogout, GrUserManager, GrUserWorker } from "react-icons/gr";
-import { CiDeliveryTruck } from "react-icons/ci";
+import { GrAnalytics,  GrUserManager  } from "react-icons/gr";
+
 import { MdFormatListBulletedAdd, MdOutlinePayment } from "react-icons/md";
-import { FaListUl, FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
-import { SiGoogletasks } from "react-icons/si";
-import { GiFullMotorcycleHelmet } from "react-icons/gi";
+import { FaListUl,  FaTasks} from "react-icons/fa";
+
+
 import { CgProfile } from "react-icons/cg";
 import { TbLogout2 } from "react-icons/tb";
 import { IoGitPullRequestSharp } from "react-icons/io5";
@@ -34,14 +34,14 @@ const Sidebar = () => {
     <div className="drawer lg:drawer-open ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex-1">
-        {/* Navbar */}
+      
         <nav className="navbar w-full bg-base-300">
           <label
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
-            {/* Sidebar toggle icon */}
+           
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -58,7 +58,7 @@ const Sidebar = () => {
             </svg>
           </label>
         </nav>
-        {/* Page content here */}
+      
       </div>
 
       <div className="drawer-side is-drawer-close:overflow-visible">
@@ -68,9 +68,9 @@ const Sidebar = () => {
           className="drawer-overlay"
         ></label>
         <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-25 is-drawer-open:w-64">
-          {/* Sidebar content here */}
+          
           <ul className="menu w-full grow">
-            {/* List item */}
+        
             <li className="">
               <Link to="/">
                 {" "}
@@ -78,7 +78,7 @@ const Sidebar = () => {
               </Link>
             </li>
            
-            {/* Dashboard links */}
+           
 
             {role === "Employee" && (
               <>

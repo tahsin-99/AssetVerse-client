@@ -41,6 +41,7 @@ const Analytics = () => {
   }
   return (
     <div>
+      <title>AssetVerse |Analytics</title>
       <div className="bg-white p-6 rounded shadow">
         <h2 className="font-bold text-xl mb-4">Returnable vs Non-returnable</h2>
 

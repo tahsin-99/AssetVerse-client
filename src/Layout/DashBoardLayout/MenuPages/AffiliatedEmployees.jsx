@@ -61,6 +61,8 @@ if(assetsLoading){
         })
   }
     return (
+      <>
+      <title>AssetVerse |Employees</title>
         <div className="overflow-x-auto">
           <h1 className='text-4xl font-semibold mb-5'>Employee Count:  {hr?.currentEmployees ?? 0}/{ (hr?.packageLimit ?? 0)}</h1>
   <table className="table table-zebra border-2 border-blue-800 px-2">
@@ -94,6 +96,7 @@ if(assetsLoading){
     </tbody>
   </table>
 </div>
+      </>
     );
 };
 

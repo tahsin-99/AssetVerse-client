@@ -47,10 +47,12 @@ const MyTeamPage = () => {
   if (isLoading) return <Loading />;
 
   return (
+
      <div className="p-6">
+      <title>AssetVerse |My Team</title>
       <h1 className="text-4xl font-bold mb-6">My Team</h1>
 
-      {/* Company Select */}
+      
       {companies.length > 1 && (
         <select
           className="select select-bordered mb-6"
@@ -63,7 +65,7 @@ const MyTeamPage = () => {
         </select>
       )}
 
-      {/* Team Grid */}
+     
       <div className="grid md:grid-cols-3 gap-4">
         {team.map(member => (
           <div
@@ -82,7 +84,7 @@ const MyTeamPage = () => {
         ))}
       </div>
 
-      {/* Upcoming Birthdays */}
+      
       <div className="mt-10">
         <h2 className="text-2xl font-semibold mb-4">
           🎉 Upcoming Birthdays (This Month)

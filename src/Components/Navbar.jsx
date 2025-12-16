@@ -40,7 +40,7 @@ const Navbar = () => {
                 <p className="text-2xl sm:text-5xl font-bold ">AssetVerse</p>
               </Link>
               <div className="hidden md:flex gap-4 font-bold">
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/"  onClick={() => window.scrollTo(0, 0)}>Home</NavLink>
                 <NavLink to="/about">About</NavLink>
                 {
                   !user &&
@@ -60,17 +60,17 @@ const Navbar = () => {
                   </>
                 )}
               </div>
-              {/* Dropdown Menu */}
+             
               <div className="relative">
                 <div className="flex flex-col md:flex-row items-center gap-3">
-                  {/* Dropdown btn */}
+                  
                   <div
                     onClick={() => setIsOpen(!isOpen)}
                     className="p-4 md:py-1 md:px-2 border border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
                   >
                     <AiOutlineMenu />
                     <div className="hidden md:block">
-                      {/* Avatar */}
+                      
                       <img
                         className="rounded-full"
                         referrerPolicy="no-referrer"

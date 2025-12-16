@@ -94,6 +94,7 @@ const ManageEmployees = () => {
 
   return (
     <>
+    <title>AssetVerse |All Request</title>
     <h1 className="text-3xl sm:text-5xl font-bold m-6">All Requests:</h1>
     <div className="overflow-x-auto">
       <table className="table table-zebra border-2 border-blue-800 px-2">

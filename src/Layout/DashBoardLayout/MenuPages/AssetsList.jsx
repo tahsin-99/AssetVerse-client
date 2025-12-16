@@ -72,6 +72,7 @@ const limit=10
 
   return (
     <>
+    <title>AssetVerse |Assets List</title>
       <h1 className="text-4xl font-bold m-6">Assets List:</h1>
       <div className="overflow-x-auto border-2 border-blue-800 rounded">
         <table className="table">
@@ -128,7 +129,9 @@ const limit=10
             ))}
           </tbody>
         </table>
-           <div className="flex justify-center my-6 gap-2">
+           
+      </div>
+      <div className="flex justify-center my-6 gap-2">
           <button
             className="btn btn-sm"
             disabled={page === 1}
@@ -157,7 +160,6 @@ const limit=10
             Next
           </button>
         </div>
-      </div>
         {selectedAsset && (
           <dialog open className="modal">
             <div className="modal-box">

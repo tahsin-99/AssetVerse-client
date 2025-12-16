@@ -3,7 +3,7 @@ import React from 'react';
 
 
 const axiosInstance = axios.create({
-    baseURL: 'https://localhost:3000'
+    baseURL: 'https://assetverse-beta.vercel.app'
 })
 
 const useAxios = () => {

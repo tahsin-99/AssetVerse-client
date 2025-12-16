@@ -32,6 +32,7 @@ const Payment = () => {
   };
   return (
     <div>
+      <title>AssetVerse |Payment</title>
       <h1 className="text-5xl font-bold text-center mt-30  ">Packages</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mt-30 px-2">

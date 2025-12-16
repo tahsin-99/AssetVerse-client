@@ -60,11 +60,13 @@ const AddAssets = () => {
   }
 
   return (
+    <>
+    <title>AssetVerse |Add Asset</title>
     <div>
       <h2 className="text-3xl sm:text-5xl font-bold">Add an Asset</h2>
       <form onSubmit={handleSubmit(addAsset)} className="mt-12 p-4 text-black
       
-      border w-full rounded-2xl w-200 mx-auto">
+      border w-full rounded-2xl mx-auto">
        
         
         <div className=" my-8">
@@ -123,12 +125,12 @@ const AddAssets = () => {
 
           <fieldset className="fieldset">
            
-            {/* sender name */}
+         
             <label className="label text-xl font-bold text-black">Product Quantity</label>
             <input
               type="text"
               {...register("productQuantity")}
-              // defaultValue={user?.displayName}
+              
               className="input w-full"
               placeholder="Product Quantity"
             />
@@ -146,6 +148,8 @@ const AddAssets = () => {
         />
       </form>
     </div>
+    
+    </>
   );
 };
 
