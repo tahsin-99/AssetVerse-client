@@ -1,16 +1,48 @@
-# React + Vite
+##Project Name : AssetVerse
+##Purpose: Corporate Asset Management System
+Live Link:https://assetverse00.netlify.app/
+Key feature list:
+a.Employee can request assets
+b.Employee can see his team information
+c.Hr can add asset
+d.Hr can manage assets and employees smoothly
+e.Hr can see his employyes
+f.limit based system
+g.stripe page integration
+h.fully responsive
+overall it is a smooth and helpful website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##npm packages i used:
+a.tailwindcss
+b.tanstack/react-query
+c.axios
+d.firebase
+e.firebase-admin
+f.framer-motion
+g.jspdf
+h.jspdf-autotable
+i.react
+j.react-dom
+k.react-hook-form
+l.react-icons
+m.react-router
+n.react-toastify
+o.recharts
+p.sweetalert2
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##setup instructions
+cd server
+npm install
+npm run start
 
-## React Compiler
+##Environment variables configuration
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+DB_USER:your_db_user
+DB_PASS:your_db_pass
+STRIPE_SECRET_KEY=your_stripe_secret_key
+CLIENT_DOMAIN:your_client_domain
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
