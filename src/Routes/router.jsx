@@ -65,7 +65,8 @@ export const router = createBrowserRouter([
     path: "/dashboard",
    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
    
-    
+    hydrateFallbackElement:<Loading></Loading>,
+    errorElement: <Errorpage></Errorpage>,
     children: [
     
       {
