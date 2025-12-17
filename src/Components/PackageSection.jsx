@@ -11,14 +11,14 @@ const axiosSecure=useAxiosSecure()
      return result.data
     }
   })
-  console.log(packages);
+
   return (
     <div className="mt-100">
       <h1 className="text-6xl font-bold text-center mt-30">Packages Section</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-30">
 
-        {packages.map((pack)=>(<div key={pack._id} className="card w-96  shadow-sm h-full pb-20 text-white bg-[#214d80] mx-auto">
+        {packages?.map((pack)=>(<div key={pack._id} className="card w-96  shadow-sm h-full pb-20 text-white bg-[#214d80] mx-auto">
         <div className="card-body">
           {
             pack.name==='Standard'&&

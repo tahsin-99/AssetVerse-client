@@ -6,6 +6,8 @@ import useAuth from "../../../hooks/useAuth";
 const Payment = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+
+  
   const { data: packages = [] } = useQuery({
     queryKey: ["packages"],
     queryFn: async () => {
@@ -13,7 +15,15 @@ const Payment = () => {
       return result.data;
     },
   });
-  console.log(user);
+
+  const { data: payments = [] } = useQuery({
+    queryKey: ["payments-history"],
+    queryFn: async () => {
+      const result = await axiosSecure.get("/payment-history");
+      return result.data;
+    },
+  });
+
   const handlePayment = async (pack) => {
     const paymentInfo = {
       packageId: pack._id,
@@ -67,7 +77,7 @@ const Payment = () => {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span> Can Manage extra {pack.employeeLimit}  Employee </span>
+                  <span> Can Manage extra {pack.employeeLimit} Employee </span>
                 </li>
                 <li>
                   <svg
@@ -127,6 +137,33 @@ const Payment = () => {
             </button>
           </div>
         ))}
+      </div>
+      <h1 className="text-4xl font-bold m-6">Assets List:</h1>
+      <div className="overflow-x-auto border-2 border-blue-800 rounded">
+        <table className="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Transection ID</th>
+              <th>Package Name</th>
+              <th>Price</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {payments.map((payment, index) => (
+              <tr key={payment._id}>
+                <th>{index + 1}</th>
+                <td>{payment.transectionId}</td>
+
+                <td>{payment.packageName}</td>
+                <td>${payment.price}</td>
+                <td>{new Date(payment.date).toLocaleString()}</td>
+                <td></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

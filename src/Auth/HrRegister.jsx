@@ -26,7 +26,7 @@ const HrRegister = () => {
     const { name, companyName, image, email, password, birthDate } = data;
 
     const imageFile = image[0];
-    console.log(data);
+   
 
     const formData = new FormData();
     formData.append("image", imageFile);

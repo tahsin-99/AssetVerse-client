@@ -19,10 +19,14 @@ const Login = () => {
       
      const res= await signIn(email, password);
       console.log(res);
-      navigate(location?.state || "/");
+     
+      setTimeout(()=>{
+         navigate(location?.state || "/");
+      },1000)
       toast.success("Login Successful",{
         autoClose:1000,
       });
+    
       
     } catch (err) {
       console.log(err);
