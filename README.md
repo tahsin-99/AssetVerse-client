@@ -1,16 +1,50 @@
-# React + Vite
+##Project Name:AssetVerse
+##Purpose:Corporate Asset Management System
+##Live URL:https://assetverse00.netlify.app/
+##Key Feature List:
+1.Employee /Hr login
+2.Role based access
+3.Add, update, and delete assets
+4.Assign assets to employees
+5.Returnable and non-returnable assets
+6.Add and manage employees
+7.Track asset allocation
+8.Upcoming birthdays / notifications
+9.Overview of assets and employees
+10.Pending requests and approvals
+11.Stripe integration for asset purchases
+12.Fully responsive UI for desktop and mobile
+13.Tailwind CSS + DaisyUI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+##npm packages:
+1.tailwindcss
+2.daisyui
+3.tanstack
+4.axios
+5.firebase
+6.firebase-admin
+7.framer-motion
+8.jspdf
+9.jspdf-autotable
+10.react
+11.react-dom
+12.react-hook-form
+13.react-icons
+14.react-router
+15.react-tostify
+16.recharts
+17.sweetalert2
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##Setup instruction
+1.cd AssetVerse
+2.npm install
+3.npm run dev
 
-## React Compiler
+##Environment Variables Configaration
+FIREBASE_KEYS= your firebase key
+VITE_IMGBB_API_KEY=your imgbb key
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
