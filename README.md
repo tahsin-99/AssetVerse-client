@@ -54,6 +54,7 @@ The purpose of AssetVerse is to help organizations track, assign, and manage cor
 
 ## 🚀 Setup Instructions
 ```bash
+git clone https://github.com/your-username/gamehub.git
 cd AssetVerse
 npm install
 npm run dev
