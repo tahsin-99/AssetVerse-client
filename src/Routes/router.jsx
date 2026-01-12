@@ -24,6 +24,7 @@ import HrRoute from "./HrRoute";
 import EmployeeRoute from "./EmployeeRoute";
 import DashBoardHome from "../Layout/DashBoardLayout/DashBoardHome";
 import Analytics from "../Layout/DashBoardLayout/MenuPages/Analytics";
+import Contact from "../Components/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         Component: About,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
       },
     ],
   },

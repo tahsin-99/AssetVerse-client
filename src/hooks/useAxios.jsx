@@ -1,13 +1,12 @@
-import axios from 'axios';
-import React from 'react';
-
+import axios from "axios";
+import React from "react";
 
 const axiosInstance = axios.create({
-    baseURL: 'https://assetverse-beta.vercel.app'
-})
+  baseURL: "http://localhost:3000",
+});
 
 const useAxios = () => {
-    return axiosInstance;
+  return axiosInstance;
 };
 
 export default useAxios;

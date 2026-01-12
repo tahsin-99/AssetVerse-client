@@ -42,6 +42,8 @@ const Navbar = () => {
               <div className="hidden md:flex gap-4 font-bold">
                 <NavLink to="/"  onClick={() => window.scrollTo(0, 0)}>Home</NavLink>
                 <NavLink to="/about">About</NavLink>
+                <NavLink to="/contact">Contact</NavLink>
+
                 {
                   !user &&
                   <>

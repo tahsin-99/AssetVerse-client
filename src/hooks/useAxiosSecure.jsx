@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
-  baseURL: "https://assetverse-beta.vercel.app",
+  baseURL: "http://localhost:3000",
 });
 const useAxiosSecure = () => {
   const { user, logOut } = useAuth();
@@ -14,17 +14,16 @@ const useAxiosSecure = () => {
       config.headers.Authorization = `Bearer ${user?.accessToken}`;
       return config;
     });
-   
 
     const resInterCeptor = axiosSecure.interceptors.response.use(
       (response) => {
         return response;
       },
-      async(error) => {
-         const statusCode = error?.response?.status; 
-      if (statusCode === 401  ) {
-         await logOut();
-        navigate("/login", { replace: true }); 
+      async (error) => {
+        const statusCode = error?.response?.status;
+        if (statusCode === 401) {
+          await logOut();
+          navigate("/login", { replace: true });
         }
         return Promise.reject(error);
       }
