@@ -3,11 +3,16 @@ import FeaturesSection from "../Components/FeaturesSection";
 
 const About = () => {
   return (
-    <div>
-        <title>AssetVerse |About</title>
-      <h1 className="mt-20 text-4xl font-bold text-blue-900 p-5">About Us</h1>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <title>AssetVerse | About</title>
 
-      <p className="text-2xl mt-10 p-5">
+      {/* Header */}
+      <h1 className="mt-20 text-4xl sm:text-5xl font-bold text-blue-900 dark:text-blue-400 p-5 text-center">
+        About Us
+      </h1>
+
+      {/* Description */}
+      <p className="max-w-5xl mx-auto text-lg sm:text-xl mt-10 p-5 text-gray-800 dark:text-gray-200 leading-relaxed">
         Our organization is dedicated to providing a comprehensive and reliable
         asset management solution designed to meet the evolving needs of modern
         institutions and businesses. The platform enables organizations to
@@ -31,7 +36,8 @@ const About = () => {
         operational excellence.
       </p>
 
-      <FeaturesSection ></FeaturesSection>
+      {/* Features Section */}
+      <FeaturesSection />
     </div>
   );
 };

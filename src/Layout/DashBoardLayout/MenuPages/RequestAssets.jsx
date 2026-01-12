@@ -60,8 +60,9 @@ const RequestAssets = () => {
 
   return (
     <>
-    <title>AssetVerse |Request Asset</title>
-  <h1 className="text-4xl font-bold m-6">Request Asset:</h1>
+   <div className="dark:bg-black">
+     <title>AssetVerse |Request Asset</title>
+  <h1 className="text-4xl font-bold m-6  dark:text-blue-500 ">Request Asset:</h1>
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 items-center justify-center ">
       {assets.map((asset) => (
         <div
@@ -166,6 +167,7 @@ const RequestAssets = () => {
         </dialog>
       )}
     </div>
+   </div>
     </>
   );
 };

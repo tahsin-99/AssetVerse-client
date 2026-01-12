@@ -6,170 +6,177 @@ import Loading from "../../../Components/Loading";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-
 const MyAssets = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-const [searchText,setSearchText]=useState('')
-const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [assetTypeFilter, setAssetTypeFilter] = useState("");
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setDebouncedSearch(searchText);
-  }, 800); 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchText);
+    }, 800);
 
-  return () => clearTimeout(timer);
-}, [searchText]);
-
+    return () => clearTimeout(timer);
+  }, [searchText]);
 
   const { data: myAssets = [], isLoading } = useQuery({
-    queryKey: ["my-assets",debouncedSearch,assetTypeFilter],
+    queryKey: ["my-assets", debouncedSearch, assetTypeFilter],
     enabled: !!user?.email,
     queryFn: async () => {
       let url = `/my-assets?searchText=${debouncedSearch}`;
-      if(assetTypeFilter){
-        url +=`&assetType=${assetTypeFilter}`
+      if (assetTypeFilter) {
+        url += `&assetType=${assetTypeFilter}`;
       }
-      const res =await axiosSecure.get(url)
+      const res = await axiosSecure.get(url);
       return res.data;
     },
   });
-  
-  const handleDownLoad=()=>{
-    const doc=new jsPDF()
 
+  const handleDownLoad = () => {
+    const doc = new jsPDF();
+    const columns = [
+      "Asset Name",
+      "Asset Type",
+      "Company",
+      "Request Date",
+      "Approval Date",
+      "Status",
+    ];
+    const rows = myAssets.map((asset) => {
+      let approvalDateStr = "—";
+      if (asset.approvalDate) {
+        approvalDateStr = new Date(asset.approvalDate).toLocaleString();
+      }
+      return [
+        asset.productName,
+        asset.productType,
+        asset.companyName,
+        new Date(asset.requestDate).toLocaleString(),
+        approvalDateStr,
+        asset.status,
+      ];
+    });
 
-     const columns = [
-    "Asset Name",
-    "Asset Type",
-    "Company",
-    "Request Date",
-    "Approval Date",
-    "Status",
-  ];
-  const rows=myAssets.map((asset)=>{
+    autoTable(doc, {
+      startY: 25,
+      head: [columns],
+      body: rows,
+      styles: { fontSize: 9 },
+      headStyles: { fillColor: [22, 160, 133] },
+    });
 
- 
-  let approvalDateStr = "—";
-  if(asset.approvalDate){
-    approvalDateStr=new Date(assetTypeFilter.approvalDate).toLocaleString()
-  }
-  return [
-    asset.productName,
-    asset.productType,
-    asset.companyName,
-    new Date(asset.requestDate).toLocaleString(),
-    approvalDateStr,
-    asset.status,
-  ]
-   })
-   autoTable(doc,{
-    startY: 25,
-    head: [columns],
-    body: rows,
-    styles: { fontSize: 9 },
-    headStyles: { fillColor: [22, 160, 133] },
-  });
+    doc.save("my-assets.pdf");
+  };
 
-  doc.save("my-assets.pdf");
-  }
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   return (
-    <div >
-      <title>AssetVerse |My Assets</title>
-      <h1 className="text-4xl font-bold">My Assets:</h1>
-      
+    <div className="min-h-screen p-5 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <title>AssetVerse | My Assets</title>
+      <h1 className="text-4xl font-bold mb-5">My Assets:</h1>
 
-    <div className="flex justify-between items-center">
-         <div>
-         <label className="input my-5" >
+      <div className="flex flex-col md:flex-row justify-between items-center mb-5 gap-3">
+        <div className="w-full md:w-auto">
+          <label className="input input-bordered w-full flex items-center dark:bg-gray-800 dark:text-gray-100">
+            <svg
+              className="h-5 w-5 opacity-50 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              fill="none"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input
+              onChange={(e) => setSearchText(e.target.value)}
+              type="search"
+              value={searchText}
+              required
+              placeholder="Search Asset"
+              className="bg-transparent focus:outline-none w-full dark:text-gray-100"
+            />
+          </label>
+        </div>
 
-        <svg
-          className="h-[1em] opacity-50 "
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <g
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeWidth="2.5"
-            fill="none"
-            stroke="currentColor"
+        <div>
+          <select
+            value={assetTypeFilter}
+            onChange={(e) => setAssetTypeFilter(e.target.value)}
+            className="select select-bordered dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
           >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </g>
-        </svg>
-        <input  onChange={(e)=>setSearchText(e.target.value)} type="search" value={searchText} required placeholder="Search Asset" />
-      </label>
-     </div>
+            <option value="">All Types</option>
+            <option value="Returnable">Returnable</option>
+            <option value="Non-returnable">Non-returnable</option>
+          </select>
+        </div>
+      </div>
 
-       <div>
-        <select
-        value={assetTypeFilter}
-        onChange={(e) => setAssetTypeFilter(e.target.value)}
-        className="select select-bordered my-2"
-      >
-        <option value="">All Types</option>
-        <option value="Returnable">Returnable</option>
-        <option value="Non-returnable">Non-returnable</option>
-      </select>
-       </div>
-    </div>
-
-      <table className="table table-zebra">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Asset Image</th>
-            <th>Asset Name</th>
-            <th>Asset Type</th>
-            <th>Company Name</th>
-            <th>Request Date</th>
-            <th>Status</th>
-            <th>Approval Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {myAssets.map((asset, index) => (
-            <tr key={asset._id}>
-              <th>{index + 1}</th>
-              <td>
-                <img
-                  className="w-15 rounded-full"
-                  src={asset.productImage}
-                  alt=""
-                />
-              </td>
-              <td>{asset.productName}</td>
-              <td>{asset.productType}</td>
-              <td>{asset.companyName}</td>
-              <td>{new Date(asset.requestDate).toLocaleString()}</td>
-              <td>{asset.status}</td>
-              <td>{new Date(asset.approvalDate).toLocaleString()}</td>
-              <td>
-                {asset.status === "approved" &&
-                  asset.productType === "Returnable" && (
-                    <>
-                      <button className="btn bg-blue-800 text-white">
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full dark:table-dark">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Asset Image</th>
+              <th>Asset Name</th>
+              <th>Asset Type</th>
+              <th>Company Name</th>
+              <th>Request Date</th>
+              <th>Status</th>
+              <th>Approval Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {myAssets.map((asset, index) => (
+              <tr key={asset._id}>
+                <th>{index + 1}</th>
+                <td>
+                  <img
+                    className="w-15 h-15 rounded-full"
+                    src={asset.productImage}
+                    alt=""
+                  />
+                </td>
+                <td>{asset.productName}</td>
+                <td>{asset.productType}</td>
+                <td>{asset.companyName}</td>
+                <td>{new Date(asset.requestDate).toLocaleString()}</td>
+                <td>{asset.status}</td>
+                <td>
+                  {asset.approvalDate
+                    ? new Date(asset.approvalDate).toLocaleString()
+                    : "—"}
+                </td>
+                <td>
+                  {asset.status === "approved" &&
+                    asset.productType === "Returnable" && (
+                      <button className="btn bg-blue-800 text-white dark:bg-blue-600 dark:text-gray-100">
                         Return
                       </button>
-                    </>
-                  )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button onClick={handleDownLoad} className="btn bg-green-700 text-white">Download PDF</button>
+                    )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <button
+        onClick={handleDownLoad}
+        className="btn mt-5 bg-green-700 text-white dark:bg-green-600 dark:text-gray-100"
+      >
+        Download PDF
+      </button>
     </div>
   );
 };
 
 export default MyAssets;
-

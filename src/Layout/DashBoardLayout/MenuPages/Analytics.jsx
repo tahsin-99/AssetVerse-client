@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import Loading from "../../../Components/Loading";
 
-const COLORS = ["#2563eb", "#16a34a"];
+const COLORS = ["#3b82f6", "#22c55e"]; // brighter for dark mode
 const BAR_COLORS = ["#f59e0b", "#10b981", "#ef4444", "#8b5cf6", "#14b8a6"];
 
 const Analytics = () => {
@@ -36,13 +36,14 @@ const Analytics = () => {
     },
   });
 
-  if (a1 || a2) {
-    return <Loading></Loading>;
-  }
+  if (a1 || a2) return <Loading />;
+
   return (
-    <div>
-      <title>AssetVerse |Analytics</title>
-      <div className="bg-white p-6 rounded shadow">
+    <div className="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 space-y-6">
+      <title>AssetVerse | Analytics</title>
+
+      {/* Pie Chart */}
+      <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
         <h2 className="font-bold text-xl mb-4">Returnable vs Non-returnable</h2>
 
         <ResponsiveContainer width="100%" height={300}>
@@ -52,26 +53,40 @@ const Analytics = () => {
               dataKey="value"
               nameKey="name"
               outerRadius={100}
-              label
+              label={{ fill: "currentColor" }}
             >
               {types.map((_, i) => (
                 <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1f2937",
+                color: "#f3f4f6",
+                border: "none",
+              }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="bg-white p-6 rounded shadow">
+      {/* Bar Chart */}
+      <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
         <h2 className="font-bold text-xl mb-4">Top Requested Assets</h2>
 
-        <ResponsiveContainer width="30%" height={300}>
+        <ResponsiveContainer width="100%" height={300}>
           <BarChart data={topAssets}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip  cursor={false}/>
-            <Bar dataKey="total" >
+            <XAxis dataKey="name" stroke="currentColor" />
+            <YAxis stroke="currentColor" />
+            <Tooltip
+              cursor={false}
+              contentStyle={{
+                backgroundColor: "#1f2937",
+                color: "#f3f4f6",
+                border: "none",
+              }}
+            />
+            <Bar dataKey="total">
               {topAssets.map((entry, index) => (
                 <Cell
                   key={entry.name}

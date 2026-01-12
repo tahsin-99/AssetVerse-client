@@ -27,6 +27,7 @@ import Analytics from "../Layout/DashBoardLayout/MenuPages/Analytics";
 import Contact from "../Components/Contact";
 import Testimonials from "../Components/Testimonials";
 import FeaturesSection from "../Components/FeaturesSection";
+import PrivacyPolicy from "../Components/PrivacyPolicy";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/services",
         Component: FeaturesSection,
+      },
+       {
+        path: "/privacy",
+        Component: PrivacyPolicy,
       },
     ],
   },

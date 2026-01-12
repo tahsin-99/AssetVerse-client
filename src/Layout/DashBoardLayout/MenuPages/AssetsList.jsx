@@ -8,18 +8,22 @@ const AssetsList = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [selectedAsset, setSelectedAsset] = useState(null);
-const [page,setPage]=useState(1)
-const limit=10
-  
-  const { data={}, refetch } = useQuery({
-    queryKey: ["assets", user?.email,page],
+  const [page, setPage] = useState(1);
+  const limit = 10;
+
+  const { data = {}, refetch } = useQuery({
+    queryKey: ["assets", user?.email, page],
     queryFn: async () => {
-      const result = await axiosSecure.get(`assets-list?page=${page}&limit=${limit}`);
+      const result = await axiosSecure.get(
+        `assets-list?page=${page}&limit=${limit}`
+      );
       return result.data;
     },
   });
- const assets = data.assets || [];
+
+  const assets = data.assets || [];
   const totalPages = data.totalPages || 1;
+
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -30,6 +34,7 @@ const limit=10
       quantity: form.quantity.value,
       date: form.date.value,
     };
+
     axiosSecure
       .patch(`/assets-list-update/${selectedAsset._id}`, updatedData)
       .then((res) => {
@@ -44,6 +49,7 @@ const limit=10
         }
       });
   };
+
   const handleParcelDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -56,7 +62,6 @@ const limit=10
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`assets-list/${id}`).then((res) => {
-          console.log(res.data);
           if (res.data.deletedCount) {
             refetch();
             Swal.fire({
@@ -71,11 +76,12 @@ const limit=10
   };
 
   return (
-    <>
-    <title>AssetVerse |Assets List</title>
-      <h1 className="text-4xl font-bold m-6">Assets List:</h1>
-      <div className="overflow-x-auto border-2 border-blue-800 rounded">
-        <table className="table">
+    <div className="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <title>AssetVerse | Assets List</title>
+      <h1 className="text-4xl font-bold mb-6">Assets List:</h1>
+
+      <div className="overflow-x-auto border-2 border-blue-800 dark:border-blue-500 rounded">
+        <table className="table w-full dark:table-auto dark:bg-gray-800 dark:text-gray-100">
           <thead>
             <tr>
               <th></th>
@@ -85,7 +91,7 @@ const limit=10
               <th>Product Quantity</th>
               <th>Available Quantity</th>
               <th>Date Added</th>
-              <th>actions</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -96,31 +102,26 @@ const limit=10
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={asset.productImage}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+                        <img src={asset.productImage} alt="Avatar" />
                       </div>
                     </div>
                   </div>
                 </td>
-                <td>
-                  <p>{asset.productName}</p>
-                </td>
+                <td>{asset.productName}</td>
                 <td>{asset.productType}</td>
                 <td>{asset.productQuantity}</td>
                 <td>{asset.availableQuantity}</td>
                 <td>{new Date(asset.dateAdded).toLocaleString()}</td>
-                <td>
+                <td className="flex gap-2">
                   <button
                     onClick={() => setSelectedAsset(asset)}
-                    className="btn bg-blue-400"
+                    className="btn bg-blue-500 dark:bg-blue-600 dark:text-gray-100"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleParcelDelete(asset._id)}
-                    className="btn bg-orange-600"
+                    className="btn bg-orange-600 dark:bg-orange-500 dark:text-gray-100"
                   >
                     Delete
                   </button>
@@ -129,85 +130,91 @@ const limit=10
             ))}
           </tbody>
         </table>
-           
       </div>
+
+      {/* Pagination */}
       <div className="flex justify-center my-6 gap-2">
+        <button
+          className="btn btn-sm"
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+        >
+          Previous
+        </button>
+
+        {[...Array(totalPages).keys()].map((num) => (
           <button
-            className="btn btn-sm"
-            disabled={page === 1}
-            onClick={() => setPage(page - 1)}
+            key={num}
+            onClick={() => setPage(num + 1)}
+            className={`btn btn-sm ${
+              page === num + 1
+                ? "btn-primary dark:bg-blue-700 dark:text-gray-100"
+                : "dark:bg-gray-700 dark:text-gray-100"
+            }`}
           >
-            Previous
+            {num + 1}
           </button>
+        ))}
 
-          {[...Array(totalPages).keys()].map((num) => (
-            <button
-              key={num}
-              onClick={() => setPage(num + 1)}
-              className={`btn btn-sm ${
-                page === num + 1 ? "btn-primary" : ""
-              }`}
-            >
-              {num + 1}
-            </button>
-          ))}
+        <button
+          className="btn btn-sm"
+          disabled={page === totalPages}
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      </div>
 
-          <button
-            className="btn btn-sm"
-            disabled={page === totalPages}
-            onClick={() => setPage(page + 1)}
-          >
-            Next
-          </button>
-        </div>
-        {selectedAsset && (
-          <dialog open className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Update Asset</h3>
+      {/* Update Modal */}
+      {selectedAsset && (
+        <dialog open className="modal">
+          <div className="modal-box dark:bg-gray-800 dark:text-gray-100">
+            <h3 className="font-bold text-lg">Update Asset</h3>
 
-              <form className="space-y-3 mt-4" onSubmit={handleUpdate}>
-                <input
-                  name="productName"
-                  defaultValue={selectedAsset.productName}
-                  className="input input-bordered w-full"
-                  placeholder="Product Name"
-                />
+            <form className="space-y-3 mt-4" onSubmit={handleUpdate}>
+              <input
+                name="productName"
+                defaultValue={selectedAsset.productName}
+                className="input input-bordered w-full dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
+                placeholder="Product Name"
+              />
 
-                <input
-                  name="productType"
-                  defaultValue={selectedAsset.productType}
-                  className="input input-bordered w-full"
-                  placeholder="Product Type"
-                />
+              <input
+                name="productType"
+                defaultValue={selectedAsset.productType}
+                className="input input-bordered w-full dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
+                placeholder="Product Type"
+              />
 
-                <input
-                  name="quantity"
-                  defaultValue={selectedAsset.quantity}
-                  className="input input-bordered w-full"
-                  placeholder="Quantity"
-                />
+              <input
+                name="quantity"
+                defaultValue={selectedAsset.quantity}
+                className="input input-bordered w-full dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
+                placeholder="Quantity"
+              />
 
-                <input
-                  name="date"
-                  defaultValue={selectedAsset.date}
-                  className="input input-bordered w-full"
-                  placeholder="Date Added"
-                />
+              <input
+                name="date"
+                defaultValue={selectedAsset.date}
+                className="input input-bordered w-full dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
+                placeholder="Date Added"
+              />
 
-                <button className="btn  btn-primary w-full mt-2">Update</button>
-              </form>
-
-              <button
-                className="btn typ btn-sm btn-error mt-3"
-                onClick={() => setSelectedAsset(null)}
-              >
-                Close
+              <button className="btn btn-primary w-full mt-2 dark:bg-blue-600 dark:text-gray-100">
+                Update
               </button>
-            </div>
-          </dialog>
-        )}
-   
-    </>
+            </form>
+
+            <button
+              className="btn btn-error btn-sm mt-3 dark:bg-red-600 dark:text-gray-100"
+              onClick={() => setSelectedAsset(null)}
+            >
+              Close
+            </button>
+          </div>
+        </dialog>
+      )}
+    </div>
   );
 };
 

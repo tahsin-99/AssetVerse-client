@@ -10,7 +10,6 @@ const MyTeamPage = () => {
   const [companies, setCompanies] = useState([]);
   const [company, setCompany] = useState("");
 
-  
   useEffect(() => {
     if (!user?.email) return;
 
@@ -18,13 +17,12 @@ const MyTeamPage = () => {
       .get("/my-companies")
       .then((res) => {
         setCompanies(res.data);
-        setCompanyFilter(res.data[0] || "");
+        setCompany(res.data[0] || "");
       })
       .catch((err) => console.log(err));
-  }, [user]);
+  }, [user, axiosSecure]);
 
-  
-    const { data: team = [], isLoading } = useQuery({
+  const { data: team = [], isLoading } = useQuery({
     queryKey: ["team", company],
     enabled: !!company,
     queryFn: async () => {
@@ -33,7 +31,7 @@ const MyTeamPage = () => {
     },
   });
 
-   const { data: birthdays = [] } = useQuery({
+  const { data: birthdays = [] } = useQuery({
     queryKey: ["birthdays", company],
     enabled: !!company,
     queryFn: async () => {
@@ -47,30 +45,29 @@ const MyTeamPage = () => {
   if (isLoading) return <Loading />;
 
   return (
-
-     <div className="p-6">
-      <title>AssetVerse |My Team</title>
+    <div className="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <title>AssetVerse | My Team</title>
       <h1 className="text-4xl font-bold mb-6">My Team</h1>
 
-      
+      {/* Company Selector */}
       {companies.length > 1 && (
         <select
-          className="select select-bordered mb-6"
+          className="select select-bordered mb-6 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         >
-          {companies.map(c => (
+          {companies.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
       )}
 
-     
+      {/* Team Grid */}
       <div className="grid md:grid-cols-3 gap-4">
-        {team.map(member => (
+        {team.map((member) => (
           <div
             key={member.employeeEmail}
-            className="card p-4 shadow border bg-green-200"
+            className="card p-4 shadow border dark:border-gray-700 dark:bg-gray-800 rounded"
           >
             <img
               src={member.employeeImage}
@@ -84,21 +81,23 @@ const MyTeamPage = () => {
         ))}
       </div>
 
-      
+      {/* Birthdays Section */}
       <div className="mt-10">
         <h2 className="text-2xl font-semibold mb-4">
           🎉 Upcoming Birthdays (This Month)
         </h2>
 
         {birthdays.length === 0 && (
-          <p className="text-gray-500">No birthdays this month</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            No birthdays this month
+          </p>
         )}
 
         <div className="grid md:grid-cols-3 gap-4">
-          {birthdays.map(b => (
+          {birthdays.map((b) => (
             <div
               key={b.employeeEmail}
-              className="p-4 border rounded bg-blue-100"
+              className="p-4 border rounded dark:border-gray-700 dark:bg-gray-800"
             >
               <h4 className="font-bold">{b.employeeName}</h4>
               <p>
