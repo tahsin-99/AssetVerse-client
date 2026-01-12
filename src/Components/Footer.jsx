@@ -37,16 +37,20 @@ const Footer = () => {
           </p>
         </div>
         <div className="space-y-4">
-          <h3 className="font-semibold text-black">Company</h3>
-          <Link to='/about' className="text-gray-300 ">About Us</Link>
-          <p className="text-gray-300">Our Mission</p>
-          <p className="text-gray-300"> Contact Saled </p>
+          <h3 className="font-semibold text-black ">Company</h3>
+          <div className="flex flex-col gap-3">
+            <Link to='/about' className="text-gray-300 ">About Us</Link>
+          
+          <Link to='/contact' className="text-gray-300"> Contact Saled </Link>
+          </div>
         </div>
         <div className="space-y-4">
           <h3 className="font-semibold text-black">Services</h3>
-          <p className="text-gray-300">Products & Services</p>
-          <p className="text-gray-300">Customer Stories</p>
-          <p className="text-gray-300">Download Apps </p>
+         <div className="flex flex-col gap-3">
+           <Link to='/services' className="text-gray-300">Products & Services</Link>
+          <Link to='/testimonials' className="text-gray-300">Customer Stories</Link>
+         </div>
+         
         </div>
         <div className="space-y-4">
           <h3 className="font-semibold text-black">Information</h3>
@@ -54,14 +58,14 @@ const Footer = () => {
             <div>
               <MdEmail className="text-black" />
             </div>
-            <div><a href="https://mail.google.com/"  target="_blank">assetverse@gmail.com</a></div>
+            <div><a href="https://mail.google.com/"  target="_blank">tahsinsikder456@gmail.com</a></div>
           </div>
 
           <div className="flex  items-center space-x-2 text-gray-300">
             <div>
               <FaPhoneAlt className="text-black" />
             </div>
-            <div>+094343453423</div>
+            <div>+8801796173241</div>
           </div>
 
           
@@ -70,11 +74,11 @@ const Footer = () => {
           <h3 className="font-semibold ">Social Links</h3>
           <div className="text-gray-300 space-y-2">
             <img src={xImg} alt="" />
-            <a href="https://x.com/"  target="_blank">AssetVerse System</a>
+            <a href="https://x.com/tahsinsikder00"  target="_blank">AssetVerse System</a>
             <img src={inImg} alt="" />
-            <a href="https://www.linkedin.com/"  target="_blank">AssetVerse System</a>
+            <a href="https://www.linkedin.com/in/tahsin-sikder99/"  target="_blank">AssetVerse System</a>
             <img src={fImg} alt="" />
-            <a href="https://www.facebook.com/"  target="_blank">AssetVerse System</a>
+            <a href="https://www.facebook.com/tahsinsikder.prithul"  target="_blank">AssetVerse System</a>
             <img src={mImg} alt="" />
             <a href="https://mail.google.com/"  target="_blank">support@cst.com</a>
           </div>

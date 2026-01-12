@@ -25,6 +25,8 @@ import EmployeeRoute from "./EmployeeRoute";
 import DashBoardHome from "../Layout/DashBoardLayout/DashBoardHome";
 import Analytics from "../Layout/DashBoardLayout/MenuPages/Analytics";
 import Contact from "../Components/Contact";
+import Testimonials from "../Components/Testimonials";
+import FeaturesSection from "../Components/FeaturesSection";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         Component: Contact,
+      },
+      {
+        path: "/testimonials",
+        Component: Testimonials,
+      },
+      {
+        path: "/services",
+        Component: FeaturesSection,
       },
     ],
   },
