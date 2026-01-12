@@ -79,10 +79,10 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 w-full rounded-md py-3 text-white transition-colors duration-300"
+                className="bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 w-full rounded-md py-3 text-white transition-colors duration-300  cursor-pointer"
               >
                 {loading ? (
-                  <span className="loading loading-bars loading-xs  cursor-pointer"></span>
+                  <span className="loading loading-bars loading-xs  "></span>
                 ) : (
                   "Login"
                 )}
