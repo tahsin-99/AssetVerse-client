@@ -7,6 +7,10 @@
      alt="AssetVerse Screenshot" 
      width="400" 
      height="300"/>
+<img src="https://github.com/tahsin-99/AssetVerse-client/blob/ab60696d13345700ab612c4f765af0165e841966/asstverse2.png" 
+     alt="AssetVerse Screenshot" 
+     width="400" 
+     height="300"/>     
 ---
 
 ## 🌐 Live URL
