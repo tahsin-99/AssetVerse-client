@@ -5,8 +5,8 @@
 ---
 <img src="https://github.com/tahsin-99/AssetVerse-client/blob/304a28c664e01450f69bc785e28b13509e18735c/AssetVerce.png" 
      alt="AssetVerse Screenshot" 
-     width="800" 
-     height="450"/>
+     width="400" 
+     height="300"/>
 ---
 
 ## 🌐 Live URL
