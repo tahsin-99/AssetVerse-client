@@ -9,32 +9,35 @@
 
 ---
 
-## 🎯 Purpose
-
-The goal of **AssetVerse** is to help organizations track, assign, and manage corporate assets while ensuring secure access for employees and HR/Admin roles.
-
----
-
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="https://github.com/tahsin-99/AssetVerse-client/blob/ab60696d13345700ab612c4f765af0165e841966/asstverse2.png" alt="AssetVerse Dashboard" width="800" />
-</p>
-
-<p align="center">
-  <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset3.png" alt="Asset Management" width="800" />
-</p>
-
-<p align="center">
-  <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset4.png" alt="Assign Assets" width="800" />
-</p>
-
-<p align="center">
-  <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset5.png" alt="Employee Management" width="800" />
-</p>
-
-<p align="center">
-  <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset6.png" alt="Mobile View" width="400" />
+  <table>
+    <tr>
+      <td>
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/304a28c664e01450f69bc785e28b13509e18735c/AssetVerce.png" alt="Home / Dashboard" width="380" />
+      </td>
+      <td>
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/ab60696d13345700ab612c4f765af0165e841966/asstverse2.png" alt="Dashboard" width="200" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset3.png" alt="Asset Management" width="380" />
+      </td>
+      <td>
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset4.png" alt="Assign Assets" width="380" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset5.png" alt="Employee Management" width="380" />
+      </td>
+      <td>
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/2694cd17e3c190093bd5c4dfdd7d3d0fa45bc021/asset6.png" alt="Mobile View" width="380" />
+      </td>
+    </tr>
+  </table>
 </p>
 
 ---
