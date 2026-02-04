@@ -18,7 +18,7 @@
         <img src="https://github.com/tahsin-99/AssetVerse-client/blob/304a28c664e01450f69bc785e28b13509e18735c/AssetVerce.png" alt="Home / Dashboard" width="380" />
       </td>
       <td>
-        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/ab60696d13345700ab612c4f765af0165e841966/asstverse2.png" alt="Dashboard" width="200" />
+        <img src="https://github.com/tahsin-99/AssetVerse-client/blob/ab60696d13345700ab612c4f765af0165e841966/asstverse2.png" alt="Dashboard" width="250" />
       </td>
     </tr>
     <tr>
